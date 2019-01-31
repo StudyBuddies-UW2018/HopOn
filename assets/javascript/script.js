@@ -1,15 +1,3 @@
-// function whatever(){
-
-
-// });
-
-// }
-// whatever();
-
-
-
-
-
 // nutrition API
 $('#get-started-button').on('click', function () {
     console.log('test');
@@ -27,37 +15,3 @@ $('#get-started-button').on('click', function () {
     });
 
 });
-
-// $("#search-button").on("click", function () {
-//     var apiKey = "&api_key=dc6zaTOxFJmzC";
-
-//     var userSearch = $("input").val();
-//     $("#display").empty();
-
-//     // userSearch = userSearch.split(" ");
-//     console.log(userSearch);
-
-
-
-//     queryURL = "http://api.giphy.com/v1/gifs/search?q=" + userSearch + apiKey;
-
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-//     }).then(function (response) {
-//         console.log(response)
-
-//         //  add 25 images based on search
-//         for (var i = 0; i < 26; i++) {
-//             var pic = response.data[i].images.fixed_width.url;
-//             console.log(pic);
-//             var $i = $("<img>");
-//             var contentImage = $i.attr("src", pic);
-//             $("#diplay").append(contentImage);
-//         }
-
-//     });
-
-
-
-// });
