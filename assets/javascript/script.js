@@ -8,7 +8,7 @@ $.ajax({
     url: queryURL,
     method: "GET",
     beforeSend: function(xhr){
-        xhr.setRequestHeader("")
+        xhr.setRequestHeader('X-RapidAPI-Key', '4e620d42c0mshd5bc66baae8748dp176b3djsn9f8470266a81');
     }
 }).then(function (results) {
     console.log(results)
