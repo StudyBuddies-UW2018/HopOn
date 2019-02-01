@@ -1,0 +1,38 @@
+<!-- map that shows our current location -->
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- Site Properties -->
+    <title>Beer App</title>
+
+    <!-- Semantic UI -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <!-- css -->
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="column">
+        <div class="ui tabular menu">
+            <a class="item" href="index.html">Home</a>
+            <a class="item" href="browse.html">Browse</a>
+            <a class="active item" href="location.html">Location</a>
+        </div>
+    </div>
+    <div id="map"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="assets/javascript/script.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY&callback=initMap">
+    </script>
+</body>
+
+</html>
+
+<!-- var mapsAPIKey = "AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY" -->
