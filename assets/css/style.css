@@ -6,13 +6,16 @@
 .get-started-button {
     color: white;
 }
+/* ==========================  FOOTER  ======================== */
+
 /* TODO: find a better way to select footer. Id's should only be used once */
-#footer {
+/* #footer {
     color: red;
     position: absolute;
     bottom: 0;
     width: 100%;
-}
+} */
+
 /* ========================== MAP STYLE ======================== */
 
 /* Always set the map height explicitly to define the size of the div
