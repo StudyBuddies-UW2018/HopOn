@@ -19,8 +19,15 @@
 
 
 // navigate to browse breweries page
-$('#get-started-button').on('click', function () {
+$('#browse-button').on('click', function () {
     window.location.replace('browse.html')
+
+});
+
+// navigate to search by location
+$('#by-location-button').on('click', function () {
+    console.log('click');
+    window.location.replace('location.html')
 
 });
 
