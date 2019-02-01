@@ -1,4 +1,4 @@
-// iffy Brewery API
+// IIFE Open Brewery API
 (function () {
     var queryURL = "https://api.openbrewerydb.org/breweries?by_state=WA";
     $.ajax({
@@ -17,6 +17,21 @@
 
 })();
 
+// IIFE BreweryDB API
+(function () {
+    var beerAPIKey = "f913c5671c3fcabead2777ee5dbe6892";
+    var queryURL = 'https://cors-anywhere.herokuapp.com/https://sandbox-api.brewerydb.com/v2/beers?key=' + beerAPIKey;
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+    }).then(function (results) {
+        console.log(results);
+        
+    });
+
+
+
+})();
 
 // navigate to browse breweries page
 $('#browse-button').on('click', function () {
@@ -30,6 +45,14 @@ $('#by-location-button').on('click', function () {
     window.location.replace('location.html')
 
 });
+
+
+
+// string key = configuration["APIKey"];
+// string uri = $"https://api.brewerydb.com/v2/featured?key={key}";
+
+
+// https://sandbox-api.brewerydb.com/v2/beers?key=f913c5671c3fcabead2777ee5dbe6892
 
 
 // Note: This example requires that you consent to location sharing when
