@@ -42,7 +42,7 @@ var map, infoWindow, geocoder, latlang;
 var geoAPIKey = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latlang + "&key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
 
 function initMap() {
-    geocoder = new google.maps.Geocoder();
+    // geocoder = new google.maps.Geocoder();
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
             lat: 47.637612499999996,
@@ -68,7 +68,7 @@ function initMap() {
 
             // console.log(geoAPIKey);
             infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
+            infoWindow.setContent('You are here');
             infoWindow.open(map);
             map.setCenter(pos);
         }, function () {
