@@ -1,4 +1,27 @@
 /* the centering on the page */
+/* 
+    gold: #e59a39;
+    navy: #1c374e;
+    light-gray: #f9f9f9;
+    red: #cf2b1e;
+    gray: #888888;
+    teal: #1ea88e;
+    black: #0c1212;
+
+*/
+
+#menu {
+    background-color: #1c374e;
+    color: red;
+
+}
+
+.a {
+    color: red;
+
+}
+
+
 .home-page {
     height: 100%;
 }
