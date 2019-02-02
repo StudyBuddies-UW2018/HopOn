@@ -1,5 +1,5 @@
 
-
+//kelsey's test
 // navigate to browse breweries page
 $('#browse-button').on('click', function () {
     window.location.replace('browse.html')
