@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>Grocery App</title>
+    <title>Brew App</title>
 
     <!-- Semantic UI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -37,18 +37,33 @@
                 <div class="ui huge header">Browse</div>
                 <p></p>
             </div>
-            <!-- <div class="ui text container" id="display">
 
-                <label for="Search">Search</label>
-                <input type="text" class="form-control" id="search-input" placeholder="search by...">
-                <button type="submit" class="ui button" id="search-button">Submit</button>
-         </div> -->
+            <div class="ui search">
+                <div class="ui icon input">
+                    <input class="prompt" id="search-input" type="text" placeholder="Search breweries...">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+            </div>
+
         </div>
     </div>
-    <!-- <h3 class="ui center aligned header"></h3> -->
+
+    <div class="ui placeholder segment">
+        <div class="ui icon header">
+            <i class="search icon"></i>
+            We don't have any documents matching your query
+        </div>
+        <div class="inline">
+            <div class="ui primary button">Clear Query</div>
+            <div class="ui button">Add Document</div>
+        </div>
+    </div>
+
+    <!-- Browse Gallery -->
     <div class="ui container">
-        <div class="ui four cards">
-            <a href="#" iv class="ui card">
+        <div class="ui four cards" id="brewGallery">
+            <!-- <a href="#" iv class="ui card">
                 <div class="extra content">
                     <span class="left floated like">
                         <i class="like icon"></i>
@@ -176,12 +191,11 @@
                         <i class="beer icon ui centered"></i>
                     </div>
                 </div>
-            </a>
-
+            </a> -->
         </div>
     </div>
 
-    <div class="ui three column stackable grid container" id="brewGallery">
+    <div class="ui three column stackable grid container">
 
         <!-- <div class="column">
             <div class="ui segment">Content1</div>

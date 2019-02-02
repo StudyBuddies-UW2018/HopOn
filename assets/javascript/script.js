@@ -1,37 +1,65 @@
 // IIFE Open Brewery API
-(function () {
-    var queryURL = "https://api.openbrewerydb.org/breweries?by_state=WA";
-    $.ajax({
-        url: queryURL,
-        method: "GET",
-    }).then(function (results) {
-        for (var i = 0; i < 10; i++) {
-            // set up brewery browse page
-            var name = (results[i].name);
-            var $column = $('<div>').addClass("three column width").text(name + " " + results[i].website_url);
-            $('#brewGallery').append($column);
-        }
-    });
-
-
-
-})();
-
+// (function () {
+//     var queryURL = "https://api.openbrewerydb.org/breweries?by_state=WA";
+//     $.ajax({
+//         url: queryURL,
+//         method: "GET",
+//     }).then(function (results) {
+//         for (var i = 0; i < 10; i++) {
+//             // set up brewery browse page
+//             var name = (results[i].name);
+//             var $column = $('<div>').addClass("three column width").text(name + " " + results[i].website_url);
+//             $('#brewGallery').append($column);
+//         }
+//     });
+// })();
+// ==============================================================================================================
 // IIFE BreweryDB API
 (function () {
     var beerAPIKey = "f913c5671c3fcabead2777ee5dbe6892";
-    var queryURL = 'https://cors-anywhere.herokuapp.com/https://sandbox-api.brewerydb.com/v2/beers?key=' + beerAPIKey;
+    var cors = 'https://cors-anywhere.herokuapp.com/';
+    var locationEndpoint = 'locations?';
+    var queryURL = cors + 'https://sandbox-api.brewerydb.com/v2/' + locationEndpoint + 'key=' + beerAPIKey; // endpoint that returns all breweries and locations
+    // TODO: find a way mto use latitude and longitude of current location to find brewries at near by lat/long
+
+
     $.ajax({
         url: queryURL,
         method: "GET",
     }).then(function (results) {
-        console.log(results);
-        
+
+
+        for (var i = 0; i < 30; i++) {
+            var breweryName = results.data[i].name;
+            var breweryImage = results.data[i].brewery.images.icon;
+            var openToPublic = results.data[i].openToPublic;
+            if (openToPublic === "Y") {
+                console.log(results);
+
+                $('#brewGallery').append(`<a href="#" iv class="ui card">
+                <div class="extra content">
+                    <span class="left floated like">
+                        <i class="like icon"></i>
+                        Like
+                    </span>
+                    <span class="right floated star">
+                        <i class="star icon"></i>
+                        Favorite
+                    </span>
+                </div>
+                <div class="content">
+                    <p>${breweryName}</p>
+                    <img src="${breweryImage}" />
+                    <p>${openToPublic}</p>
+                    <i class="beer icon ui centered right floated"></i>
+                </div>
+            </a>`);
+            }
+        }
     });
-
-
-
 })();
+// ==============================================================================================================
+
 
 // navigate to browse breweries page
 $('#browse-button').on('click', function () {
@@ -47,13 +75,7 @@ $('#by-location-button').on('click', function () {
 });
 
 
-
-// string key = configuration["APIKey"];
-// string uri = $"https://api.brewerydb.com/v2/featured?key={key}";
-
-
-// https://sandbox-api.brewerydb.com/v2/beers?key=f913c5671c3fcabead2777ee5dbe6892
-
+// ==============================================================================================================
 
 // Note: This example requires that you consent to location sharing when
 // prompted by your browser. If you see the error "The Geolocation service
