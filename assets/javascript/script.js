@@ -20,7 +20,9 @@
 (function () {
     var cors = 'https://cors-anywhere.herokuapp.com/';
     var locationEndpoint = 'locations?';
-    var queryURL = cors + 'https://sandbox-api.brewerydb.com/v2/' + locationEndpoint + 'key=' + secrets.beerAPIkey; // endpoint that returns all breweries and locations
+    var beerAPIkey = 'f913c5671c3fcabead2777ee5dbe6892';
+    var queryURL = cors + 'https://sandbox-api.brewerydb.com/v2/' + locationEndpoint + 'key=' + beerAPIkey; // endpoint that returns all breweries and locations
+    
     // TODO: find a way mto use latitude and longitude of current location to find brewries at near by lat/long
 
 
@@ -84,6 +86,7 @@ $('#by-location-button').on('click', function () {
 // locate you.
 var map, infoWindow, geocoder, latlang;
 
+var googleMapsAPIkey = "AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
 // my apartment lat/lang endpoint
 var geoAPIKey = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latlang + "&key=" + googleMapsAPIkey;
 

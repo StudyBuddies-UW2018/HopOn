@@ -20,7 +20,7 @@ $('#by-location-button').on('click', function () {
 // prompted by your browser. If you see the error "The Geolocation service
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
-var map, infoWindow, geocoder, lat, lng;
+var map, infoWindow, geocoder, latlang;
 
 // my apartment lat/lang endpoint
 var geoAPIKey = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latlang + "&key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
@@ -46,7 +46,7 @@ function initMap() {
             };
             lat = pos.lat;
             lng = pos.lng;
-            console.log("latlng" + pos);
+            console.log("latlang" + pos);
             // console.log(latlang);
             // // TODO: getter for pos??
             // var geoAPIKey = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latlang + "&key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
