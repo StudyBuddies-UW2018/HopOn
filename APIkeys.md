@@ -20,3 +20,10 @@ endpoint: https://cors-anywhere.herokuapp.com/https://sandbox-api.brewerydb.com/
 --> need cors hookup to work
 --> sandbox
 --> this searches by location
+
+
+POSSIBLE SEARCH BY LOCATION ENDPOINT
+DOCUMENTATION -->>> https://www.brewerydb.com/developers/docs/endpoint/search-geopoint
+endpoint: /search/geo/point?lat=35.772096&lng=-78.638614
+
+https://cors-anywhere.herokuapp.com/https://sandbox-api.brewerydb.com/v2/search/geo/point?lat=35.772096&lng=-78.638614?key=f913c5671c3fcabead2777ee5dbe6892
