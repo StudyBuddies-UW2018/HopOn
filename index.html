@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>Brew App</title>
+    <title>Hop On</title>
 
     <!-- Semantic UI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -18,10 +18,12 @@
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
+    <!-- TODO:   Insert Ajax link -->
 
 </head>
 
 <body>
+    <!-- NavBar -->
     <div class="column">
         <div class="ui tabular menu">
             <a class="active item" href="index.html"><i class="home icon"></i>Home</a>
@@ -29,6 +31,8 @@
             <a class="item" href="location.html">Location</a>
         </div>
     </div>
+
+    <!-- Main Page Content -->
     <div class="ui middle aligned center aligned grid home-page">
         <div class="column">
             <div class="ui text container">
@@ -36,14 +40,16 @@
                     Brew Site
                 </h1>
                 <h2>Let's get to a brewery!</h2>
-                <div class="ui huge primary button" id="browse-button">Browse</a></div>
-                <div class="ui huge primary button" id="by-location-button">Find by Location</a></div>
+                <!-- Gallery of Breweries -->
+                <div class="ui huge primary button" id="browse-button">Browse</div>
+                <!-- Show current location -->
+                <div class="ui huge primary button" id="by-location-button">Find by Location</div>
             </div>
-
         </div>
     </div>
 
     <!-- footer -->
+    <!-- FIXME: Stock footer: edit and reduce -->
     <div class="ui inverted vertical footer segment">
         <div class="ui center aligned container">
             <div class="ui stackable inverted divided grid">
@@ -101,8 +107,9 @@
     <!-- end footer -->
     </div>
 
-
+    <!-- Semantic UI script -->
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <!-- Our JS script -->
     <script src="assets/javascript/script.js"></script>
 </body>
 

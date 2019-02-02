@@ -1,5 +1,4 @@
-
-
+// FIXME: Delete this BreweryDB API
 // IIFE Open Brewery API
 // (function () {
 //     var queryURL = "https://api.openbrewerydb.org/breweries?by_state=WA";
@@ -17,13 +16,15 @@
 // })();
 // ==============================================================================================================
 // IIFE BreweryDB API
+
 (function () {
+    // Cors hookup added to make Cors friendly
     var cors = 'https://cors-anywhere.herokuapp.com/';
     var locationEndpoint = 'locations?';
-    var beerAPIkey = 'f913c5671c3fcabead2777ee5dbe6892';
+    var beerAPIkey = 'f913c5671c3fcabead2777ee5dbe6892'; //TODO: Make this private
     var queryURL = cors + 'https://sandbox-api.brewerydb.com/v2/' + locationEndpoint + 'key=' + beerAPIkey; // endpoint that returns all breweries and locations
-    
-    // TODO: find a way mto use latitude and longitude of current location to find brewries at near by lat/long
+
+    // TODO: find a way to use latitude and longitude of current location to find brewries at near by lat/long
 
 
     $.ajax({
@@ -31,11 +32,12 @@
         method: "GET",
     }).then(function (results) {
 
-
+        // Listing 30 Breweries TODO: Create it for local to area
         for (var i = 0; i < 30; i++) {
             var breweryName = results.data[i].name;
             var breweryImage = results.data[i].brewery.images.icon;
             var openToPublic = results.data[i].openToPublic;
+            //TODO: Add additional value returns perhaps description and open right now?
             if (openToPublic === "Y") {
                 console.log(results);
 
@@ -85,29 +87,35 @@ $('#by-location-button').on('click', function () {
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
 var map, infoWindow, geocoder, latlang;
+//TODO: Add global variable for getter and setter for the position
 
 var googleMapsAPIkey = "AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
 // my apartment lat/lang endpoint
+//FIXME: Is line below currently being used?
 var geoAPIKey = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latlang + "&key=" + googleMapsAPIkey;
 
 function initMap() {
     // geocoder = new google.maps.Geocoder();
+    //TODO: Change lat./long. to USA
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
             lat: 47.637612499999996,
             lng: -122.32353949999998
         },
+        //How far zoomed in the map is
         zoom: 13
     });
+    //Unsure of what does this does
     infoWindow = new google.maps.InfoWindow;
 
 
     // Try HTML5 geolocation.
+    //Unsure of what does this does
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             var pos = {
                 lat: position.coords.latitude,
-                lng: position.coords.longitude,
+                lng: position.coords.longitude
             };
             latlang = pos.lat + "," + pos.lng;
             console.log(pos);
