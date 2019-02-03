@@ -52,7 +52,7 @@ var geoLocation = function () {
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
     }
-  
+
 
 };
 var googleMapsAPIkey = "AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
@@ -87,24 +87,26 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 
 function beer() {
-    var beerAPIKey = "f913c5671c3fcabead2777ee5dbe6892";
-    var cors = 'https://cors-anywhere.herokuapp.com/';
-    var searchEndpoint = 'search/geo/point?lat=' + lat + '&lng=' + lng + '&radius=100';
-    console.log("search endpoint " + searchEndpoint);
-    var queryURL = cors + 'https://sandbox-api.brewerydb.com/v2/' + searchEndpoint + '&key=' + beerAPIKey; // endpoint that returns all breweries and locations
-
+    // var beerAPIKey = "f913c5671c3fcabead2777ee5dbe6892";
+    // var cors = 'https://cors-anywhere.herokuapp.com/';
+    // var searchEndpoint = 'search/geo/point?lat=' + lat + '&lng=' + lng + '&radius=100';
+    // console.log("search endpoint " + searchEndpoint);
+    // var queryURL = cors + 'https://sandbox-api.brewerydb.com/v2/' + searchEndpoint + '&key=' + beerAPIKey; // endpoint that returns all breweries and locations
+    var queryURL2 = 'https://cors-anywhere.herokuapp.com/https://www.brewerydb.com/browse/map/get-breweries?lat=47.6338217&lng=-122.32154479999997';
     // end result URL --> functioning
     // https://cors-anywhere.herokuapp.com/https://sandbox-api.brewerydb.com/v2/search/geo/point?lat=47.637612499999996&lng=-122.32353949999998&radius=100&key=f913c5671c3fcabead2777ee5dbe6892
 
-    console.log(queryURL);
+    console.log(queryURL2);
     console.log("TEST2" + lat + lng);
 
 
     $.ajax({
-        url: queryURL,
+        url: queryURL2,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         method: "GET",
     }).then(function (results) {
-        console.log("TEST" + lat + lng);
+        console.log(results);
 
     });
 };
