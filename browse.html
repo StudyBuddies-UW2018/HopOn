@@ -15,33 +15,30 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <!-- css -->
     <link href="assets/css/style.css" type="text/css" rel="stylesheet">
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-    <!-- TODO:   Insert Ajax link -->
 
 </head>
 
 <body>
-    <!-- Nav Bar -->
-    <div class="ui secondary  menu">
+    <!-- NavBar -->
+    <div class="ui secondary  menu" id="menu">
         <a class="item" href="index.html">
-            Home
+            <p class="navItem">Home</p>
         </a>
         <a class="item" href="#">
-            About
+            <p class="navItem">About</p>
         </a>
-        <a class="active item" href="browse.html">
-            Browse
+        <a class="item" href="browse.html">
+            <p class="active navItem">Browse</p>
         </a>
         <a class="item" href="location.html">
-            Nearby
+            <p class="navItem">Nearby</p>
         </a>
         <a class="item" href="#">
-            Contact Us
+            <p class="navItem">Contact Us</p>
         </a>
     </div>
 
+    <!-- Main Page Content -->
     <div class="ui middle aligned center aligned grid">
         <div class="column">
             <div class="ui sizer vertical segment">
@@ -72,139 +69,8 @@
     </div>
 
     <!-- Browse Gallery -->
-    <!-- FIXME: Determine the layout and reduce -->
     <div class="ui container">
-        <div class="ui four cards" id="brewGallery">
-            <!-- <a href="#" iv class="ui card">
-                <div class="extra content">
-                    <span class="left floated like">
-                        <i class="like icon"></i>
-                        Like
-                    </span>
-                    <span class="right floated star">
-                        <i class="star icon"></i>
-                        Favorite
-                    </span>
-                </div>
-                <div class="content">
-                    <i class="beer icon ui centered"></i>
-                </div>
-            </a>
-
-            <a href="#" iv class="ui card">
-                <div class="extra content">
-                    <span class="left floated like">
-                        <i class="like icon"></i>
-                        Like
-                    </span>
-                    <span class="right floated star">
-                        <i class="star icon"></i>
-                        Favorite
-                    </span>
-                </div>
-                <div class="content">
-                    <i class="beer icon ui centered"></i>
-                </div>
-            </a>
-
-            <a href="#" iv class="ui card">
-                <div class="extra content">
-                    <span class="left floated like">
-                        <i class="like icon"></i>
-                        Like
-                    </span>
-                    <span class="right floated star">
-                        <i class="star icon"></i>
-                        Favorite
-                    </span>
-                </div>
-                <div class="content">
-                    <i class="beer icon ui centered"></i>
-                </div>
-            </a>
-
-            <a href="#" iv class="ui card">
-                <div class="extra content">
-                    <span class="left floated like">
-                        <i class="like icon"></i>
-                        Like
-                    </span>
-                    <span class="right floated star">
-                        <i class="star icon"></i>
-                        Favorite
-                    </span>
-                </div>
-                <div class="content">
-                    <i class="beer icon ui centered"></i>
-                </div>
-            </a>
-
-
-            <a href="#" class="ui card">
-                <div class="content">
-                    <div class="header">Cute Dog</div>
-                    <div class="meta">
-                        <span class="category">Animals</span>
-                    </div>
-                    <div class="description">
-                        <i class="beer icon ui centered"></i>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <i class="beer icon ui centered"></i>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="ui card">
-                <div class="content">
-                    <div class="header">Cute Dog</div>
-                    <div class="meta">
-                        <span class="category">Animals</span>
-                    </div>
-                    <div class="description">
-                        <i class="beer icon ui centered"></i>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <i class="beer icon ui centered"></i>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="ui card">
-                <div class="content">
-                    <div class="header">Cute Dog</div>
-                    <div class="meta">
-                        <span class="category">Animals</span>
-                    </div>
-                    <div class="description">
-                        <i class="beer icon ui centered"></i>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <i class="beer icon ui centered"></i>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="ui card">
-                <div class="content">
-                    <div class="header">Cute Dog</div>
-                    <div class="meta">
-                        <span class="category">Animals</span>
-                    </div>
-                    <div class="description">
-                        <i class="beer icon ui centered"></i>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div class="right floated author">
-                        <i class="beer icon ui centered"></i>
-                    </div>
-                </div>
-            </a> -->
-        </div>
+        <div class="ui four cards" id="brewGallery"></div>
     </div>
 
     <!-- footer -->
@@ -265,6 +131,8 @@
     </div>
     <!-- end footer -->
 
+    <!-- ajax/jQuery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Semantic UI script -->
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <!-- Our JS script -->
