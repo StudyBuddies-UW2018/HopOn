@@ -1,10 +1,12 @@
+var cors = 'https://cors-anywhere.herokuapp.com/';
+
+
 (function () {
     // Cors hookup added to make Cors friendly
-    var cors = 'https://cors-anywhere.herokuapp.com/';
     var locationEndpoint = 'locations?';
     var beerAPIkey = 'f913c5671c3fcabead2777ee5dbe6892'; //TODO: Make this private
     var queryURL = cors + 'https://sandbox-api.brewerydb.com/v2/' + locationEndpoint + 'key=' + beerAPIkey; // endpoint that returns all breweries and locations
-
+    console.log("beer1" + queryURL);
     // TODO: find a way to use latitude and longitude of current location to find brewries at near by lat/long
 
 
@@ -128,31 +130,49 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 // ==============================================================================================================
-
-
-// this function is calling all breweries within a 100 mi radius of current location
 function beer() {
-    var beerAPIKey = "f913c5671c3fcabead2777ee5dbe6892";
-    var cors = 'https://cors-anywhere.herokuapp.com/';
-    // here current location is being set and radius is being set
-    var searchEndpoint = 'search/geo/point?lat=' + lat + '&lng=' + lng + '&radius=100';
-    console.log("search endpoint " + searchEndpoint);
-    var queryURL = cors + 'https://sandbox-api.brewerydb.com/v2/' + searchEndpoint + '&key=' + beerAPIKey; // endpoint that returns all breweries and locations
-
-    // end result URL --> functioning
-    // https://cors-anywhere.herokuapp.com/https://sandbox-api.brewerydb.com/v2/search/geo/point?lat=47.637612499999996&lng=-122.32353949999998&radius=100&key=f913c5671c3fcabead2777ee5dbe6892
-
-    console.log(queryURL);
-    console.log("Current location: " + lat + lng);
+    // this endpoint is hitting the Brewery DB webesite directly instead of the sandbox
+    // it is using the current location lat/lng to locate breweries within a 10 mi radius
+    // 10 mi is the default radius per the documentation
+    var queryURL2 = cors + 'https://www.brewerydb.com/browse/map/get-breweries?lat=' + lat + '&lng=' + lng;
+    console.log(queryURL2);
+    console.log("Current lat + lng: " + lat + lng);
 
 
     $.ajax({
-        url: queryURL,
+        url: queryURL2,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         method: "GET",
     }).then(function (results) {
         console.log(results);
 
+        var arrayLength = results.totalResults;
+        console.log("array length: " + arrayLength);
+
+        for (var i = 0; i < arrayLength.length; i++){
+            
+        }
+
+        // pos1 = {
+        //     lat: position.coords.latitude,
+        //     lng: position.coords.longitude
+        // };
+        // pos2 = {
+        //     lat: position.coords.latitude,
+        //     lng: position.coords.longitude
+        // };
+        // pos3 = {
+        //     lat: position.coords.latitude,
+        //     lng: position.coords.longitude
+        // };
+
+        // infoWindow.setPosition(pos1);
+        // infoWindow.setPosition(pos2);
+        // infoWindow.setPosition(pos3);
+
     });
 };
+
 
 // ==============================================================================================================
