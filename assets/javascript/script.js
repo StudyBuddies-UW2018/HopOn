@@ -65,7 +65,7 @@ $('#by-location-button').on('click', function () {
 // prompted by your browser. If you see the error "The Geolocation service
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
-var map, infoWindow, geocoder, latlang, pos;
+var map, infoWindow, geocoder, lat, lng, pos;
 //TODO: Add global variable for getter and setter for the position
 
 
@@ -76,17 +76,17 @@ var geoLocation = function () {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            latlang = pos.lat + "," + pos.lng;
+            lat = pos.lat;
+            lng = pos.lng;
 
-            // TODO: getter for pos??
-            var geoAPIKey = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latlang + "&key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
-            console.log(pos);
-
-            // console.log(geoAPIKey);
+            // console.log("pos: " + lat + " " + lng);
+            var geoAPIKey = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
+            console.log("geoAPIKey: " + geoAPIKey);
             infoWindow.setPosition(pos);
             infoWindow.setContent('You are here');
             infoWindow.open(map);
             map.setCenter(pos);
+            beer();
 
             // TODO: Get brewery info
         }, function () {
@@ -96,8 +96,9 @@ var geoLocation = function () {
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
     }
-};
 
+
+};
 var googleMapsAPIkey = "AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
 // my apartment lat/lang endpoint
 
@@ -125,3 +126,33 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
+
+// ==============================================================================================================
+
+
+// this function is calling all breweries within a 100 mi radius of current location
+function beer() {
+    var beerAPIKey = "f913c5671c3fcabead2777ee5dbe6892";
+    var cors = 'https://cors-anywhere.herokuapp.com/';
+    // here current location is being set and radius is being set
+    var searchEndpoint = 'search/geo/point?lat=' + lat + '&lng=' + lng + '&radius=100';
+    console.log("search endpoint " + searchEndpoint);
+    var queryURL = cors + 'https://sandbox-api.brewerydb.com/v2/' + searchEndpoint + '&key=' + beerAPIKey; // endpoint that returns all breweries and locations
+
+    // end result URL --> functioning
+    // https://cors-anywhere.herokuapp.com/https://sandbox-api.brewerydb.com/v2/search/geo/point?lat=47.637612499999996&lng=-122.32353949999998&radius=100&key=f913c5671c3fcabead2777ee5dbe6892
+
+    console.log(queryURL);
+    console.log("Current location: " + lat + lng);
+
+
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+    }).then(function (results) {
+        console.log(results);
+
+    });
+};
+
+// ==============================================================================================================
