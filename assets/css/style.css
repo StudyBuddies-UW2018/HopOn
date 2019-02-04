@@ -10,6 +10,23 @@
 
 */
 
+/* adding our custom font */
+@font-face { font-family: library-3-am; src: url('../fonts/library-3-am/Library-3-am.otf'); } 
+.home-title {
+    font-family: library-3-am!important;
+    color: #cf2b1e!important;
+    font-weight: 600!important;
+    font-size: 4em!important;
+}
+
+h2 {
+    color: #888888;
+}
+
+p {
+    color: #888888;
+}
+
 #menu {
     background-color: #1c374e;
 }
