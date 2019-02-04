@@ -147,11 +147,31 @@ function beer() {
     }).then(function (results) {
         console.log(results);
 
+
         var arrayLength = results.totalResults;
         console.log("array length: " + arrayLength);
 
-        for (var i = 0; i < arrayLength.length; i++){
-            
+
+        for (var i = 0; i < arrayLength; i++) {
+            // brewery name
+            var breweryName = results.data[i].brewery.name;
+            var breweryDescription = results.data[25].brewery.desciprtion;
+            // is the brewery open to the public? Yes they all are
+            var openToPublic = results.data[i].openToPublic;
+            // var brandClassification = results.data[i].brewery.brandClassification;
+
+            // is it a certified craft brewer? - Not a field for all entries
+            // var isCertifiedCraftBrewer = results.data[i].brewery.brewersAssociation.isCertifiedCraftBrewer;
+            // TODO:find out what to do when not a field for all entries
+
+            if (openToPublic === "Y") {
+                console.log("name: " + i + " " + breweryName);
+                console.log("description: " + breweryDescription)
+                console.log("Open: " + openToPublic);
+                // console.log("brand: " + brandClassification);
+
+                // console.log("certified? " + isCertifiedCraftBrewer);
+            }
         }
 
         // pos1 = {
