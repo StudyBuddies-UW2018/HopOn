@@ -145,17 +145,36 @@ function beer() {
         dataType: "json",
         method: "GET",
     }).then(function (results) {
+        var brandClassification = results.data[i];
+        console.log(brandClassification);
         console.log(results);
-
 
         var arrayLength = results.totalResults;
         console.log("array length: " + arrayLength);
+      
 
-
+        // loop through array
         for (var i = 0; i < arrayLength; i++) {
-            // brewery name
-            var breweryName = results.data[i].brewery.name;
-            var breweryDescription = results.data[i].brewery.desciprtion;
+            // loop through objects
+            var breweries = results.data[i].brewery;
+            for (key in breweries) {
+                // check to see if inside respnse we have property === to description
+                if (results.hasOwnProperty(description)) {
+                    // brewery name
+                    var breweryName = results.data[i].brewery.name;
+                    // brewery description
+                    var breweryDescription = results.data[i].brewery.desciprtion;
+                    return console.log("name: " + breweryName + ", description: " + breweryDescription);
+                };
+                // if true, push name, description, website, street address object into new empty array called "topBreweries"
+            }
+
+
+
+
+
+
+
             // is the brewery open to the public? Yes they all are
             var openToPublic = results.data[i].openToPublic;
             // var brandClassification = results.data[i].brewery.brandClassification;
@@ -164,35 +183,14 @@ function beer() {
             // var isCertifiedCraftBrewer = results.data[i].brewery.brewersAssociation.isCertifiedCraftBrewer;
             // TODO:find out what to do when not a field for all entries
 
-            if (openToPublic === "Y") {
-                console.log("name: " + i + " " + breweryName);
-                console.log("description: " + breweryDescription)
-                console.log("Open: " + openToPublic);
-                // console.log("brand: " + brandClassification);
+            // if (openToPublic === "Y") {
+            //     console.log("name: " + i + " " + breweryName);
+            //     console.log("description: " + breweryDescription)
+            //     console.log("Open: " + openToPublic);
 
-                // console.log("certified? " + isCertifiedCraftBrewer);
-            }
+            // }
         }
 
-        // pos1 = {
-        //     lat: position.coords.latitude,
-        //     lng: position.coords.longitude
-        // };
-        // pos2 = {
-        //     lat: position.coords.latitude,
-        //     lng: position.coords.longitude
-        // };
-        // pos3 = {
-        //     lat: position.coords.latitude,
-        //     lng: position.coords.longitude
-        // };
-
-        // infoWindow.setPosition(pos1);
-        // infoWindow.setPosition(pos2);
-        // infoWindow.setPosition(pos3);
 
     });
 };
-
-
-// ==============================================================================================================
