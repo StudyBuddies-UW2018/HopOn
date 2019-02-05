@@ -241,3 +241,63 @@ function beer() {
 
 // beer();
 // ==============================================================================================================
+
+
+// ==============================================================================================================
+
+(function () {
+    // this endpoint is hitting the Brewery DB webesite directly instead of the sandbox
+    // it is using the current location lat/lng to locate breweries within a 10 mi radius
+    // 10 mi is the default radius per the documentation
+    var queryURL2 = cors + 'https://www.brewerydb.com/browse/map/get-breweries?lat=' + lat + '&lng=' + lng;
+    console.log(queryURL2);
+    console.log("Current lat + lng: " + lat + lng);
+
+
+    $.ajax({
+        url: queryURL2,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        method: "GET",
+    }).then(function (results) {
+
+        console.log(results);
+
+        var arrayLength = results.totalResults;
+        console.log("array length: " + arrayLength);
+        var breweryName = results.data[i].brewery.name;
+        var breweryImage = results.data[i].brewery.images.icon;
+        var openToPublic = results.data[i].openToPublic;
+
+        // loop through array
+        for (var i = 0; i < arrayLength; i++) {
+            var breweryDescription = results.data[i].brewery.description;
+
+            if (!breweryDescription) {
+                breweryDescription = "some description";
+            }
+            console.log(breweryDescription);
+
+            $('#brewGallery').append(`<a href="#" iv class="ui card">
+            <div class="extra content">
+                <span class="left floated like">
+                    <i class="like icon"></i>
+                    Like
+                </span>
+                <span class="right floated star">
+                    <i class="star icon"></i>
+                    Favorite
+                </span>
+            </div>
+            <div class="content">
+                <p>${breweryName}</p>
+                <img src="${breweryImage}" />
+                <p>${openToPublic}</p>
+                <i class="beer icon ui centered right floated"></i>
+            </div>
+        </a>`);
+        }
+    });
+   
+})();
+// ==============================================================================================================

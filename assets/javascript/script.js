@@ -1,52 +1,3 @@
-var cors = 'https://cors-anywhere.herokuapp.com/';
-
-
-(function () {
-    // Cors hookup added to make Cors friendly
-    var locationEndpoint = 'locations?';
-    var beerAPIkey = 'f913c5671c3fcabead2777ee5dbe6892'; //TODO: Make this private
-    var queryURL = cors + 'https://sandbox-api.brewerydb.com/v2/' + locationEndpoint + 'key=' + beerAPIkey; // endpoint that returns all breweries and locations
-    console.log("beer1" + queryURL);
-    // TODO: find a way to use latitude and longitude of current location to find brewries at near by lat/long
-
-
-    $.ajax({
-        url: queryURL,
-        method: "GET",
-    }).then(function (results) {
-
-        // Listing 30 Breweries TODO: Create it for local to area
-        for (var i = 0; i < 30; i++) {
-            var breweryName = results.data[i].name;
-            var breweryImage = results.data[i].brewery.images.icon;
-            var openToPublic = results.data[i].openToPublic;
-            //TODO: Add additional value returns perhaps description and open right now?
-            if (openToPublic === "Y") {
-                //console.log(results);
-
-                $('#brewGallery').append(`<a href="#" iv class="ui card">
-                <div class="extra content">
-                    <span class="left floated like">
-                        <i class="like icon"></i>
-                        Like
-                    </span>
-                    <span class="right floated star">
-                        <i class="star icon"></i>
-                        Favorite
-                    </span>
-                </div>
-                <div class="content">
-                    <p>${breweryName}</p>
-                    <img src="${breweryImage}" />
-                    <p>${openToPublic}</p>
-                    <i class="beer icon ui centered right floated"></i>
-                </div>
-            </a>`);
-            }
-        }
-    });
-})();
-// ==============================================================================================================
 
 // navigate to browse breweries page
 $('#browse-button').on('click', function () {
@@ -88,7 +39,7 @@ var geoLocation = function () {
             infoWindow.setContent('You are here');
             infoWindow.open(map);
             map.setCenter(pos);
-            beer();
+            // beer();
 
             // TODO: Get brewery info
         }, function () {
@@ -130,13 +81,17 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 // ==============================================================================================================
-function beer() {
+var cors = 'https://cors-anywhere.herokuapp.com/';
+
+(function () {
+    // geoLocation();
+
     // this endpoint is hitting the Brewery DB webesite directly instead of the sandbox
     // it is using the current location lat/lng to locate breweries within a 10 mi radius
     // 10 mi is the default radius per the documentation
-    var queryURL2 = cors + 'https://www.brewerydb.com/browse/map/get-breweries?lat=' + lat + '&lng=' + lng;
+    var queryURL2 = cors + 'https://www.brewerydb.com/browse/map/get-breweries?lat=' + '47.637612499999996' + '&lng=' + '-122.32353949999998';
     console.log(queryURL2);
-    console.log("Current lat + lng: " + lat + lng);
+    // console.log("Current lat + lng: " + lat + lng);
 
 
     $.ajax({
@@ -145,54 +100,49 @@ function beer() {
         dataType: "json",
         method: "GET",
     }).then(function (results) {
-        console.log(results);
 
+        console.log(results);
 
         var arrayLength = results.totalResults;
         console.log("array length: " + arrayLength);
 
 
+        // loop through array
         for (var i = 0; i < arrayLength; i++) {
-            // brewery name
             var breweryName = results.data[i].brewery.name;
-            var breweryDescription = results.data[i].brewery.desciprtion;
-            // is the brewery open to the public? Yes they all are
-            var openToPublic = results.data[i].openToPublic;
-            // var brandClassification = results.data[i].brewery.brandClassification;
+            // var openToPublic = results.data[i].openToPublic;
+            var breweryDescription = results.data[i].brewery.description;
 
-            // is it a certified craft brewer? - Not a field for all entries
-            // var isCertifiedCraftBrewer = results.data[i].brewery.brewersAssociation.isCertifiedCraftBrewer;
-            // TODO:find out what to do when not a field for all entries
-
-            if (openToPublic === "Y") {
-                console.log("name: " + i + " " + breweryName);
-                console.log("description: " + breweryDescription)
-                console.log("Open: " + openToPublic);
-                // console.log("brand: " + brandClassification);
-
-                // console.log("certified? " + isCertifiedCraftBrewer);
+            if (!breweryDescription) {
+                breweryDescription = "some description";
             }
+
+            var breweryImage = results.data[i].brewery.images;
+
+            if (typeof breweryImage === 'undefined'){
+                breweryImage = "assets/images/hop.png";
+
+            } else {
+                breweryImage = results.data[i].brewery.images.icon;
+            }
+
+            $('#brewGallery').append(`<a href="#" iv class="ui card">
+            <div class="extra content">
+                <span class="left floated like">
+                    <i class="like icon"></i>
+                    Like
+                </span>
+                <span class="right floated star">
+                    <i class="star icon"></i>
+                    Favorite
+                </span>
+            </div>
+            <div class="content center aligned">
+                <p>${breweryName}</p>
+                <img src="${breweryImage}" width='64' height='64' />
+            </div>
+        </a>`);
         }
-
-        // pos1 = {
-        //     lat: position.coords.latitude,
-        //     lng: position.coords.longitude
-        // };
-        // pos2 = {
-        //     lat: position.coords.latitude,
-        //     lng: position.coords.longitude
-        // };
-        // pos3 = {
-        //     lat: position.coords.latitude,
-        //     lng: position.coords.longitude
-        // };
-
-        // infoWindow.setPosition(pos1);
-        // infoWindow.setPosition(pos2);
-        // infoWindow.setPosition(pos3);
-
     });
-};
 
-
-// ==============================================================================================================
+})();
