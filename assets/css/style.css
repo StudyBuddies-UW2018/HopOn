@@ -19,7 +19,7 @@
     font-size: 4em!important;
 }
 
-h2 {
+h1, h2 {
     color: #888888;
 }
 
@@ -43,6 +43,11 @@ p {
 
 #browse-button {
     background-color: #888888;
+}
+
+#brewery-site-button {
+    background-color: #cf2b1e;
+
 }
 
 
