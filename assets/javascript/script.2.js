@@ -1,3 +1,4 @@
+// for kelsey
 var cors = 'https://cors-anywhere.herokuapp.com/';
 
 
@@ -145,54 +146,67 @@ function beer() {
         dataType: "json",
         method: "GET",
     }).then(function (results) {
+        // var brandClassification = results.data[0];
+        // console.log(brandClassification);
         console.log(results);
-
+        var breweryName = results.data[0].brewery.name;
+        console.log(breweryName);
+        var breweryDescription = results.data[0].brewery.description;
+        console.log(breweryDescription);
 
         var arrayLength = results.totalResults;
         console.log("array length: " + arrayLength);
+      
 
-
+        // loop through array
         for (var i = 0; i < arrayLength; i++) {
-            // brewery name
+            // loop through objects
+            // var breweries = results.data[i].brewery;
+            // for (key in breweries) {
+            //     // check to see if inside respnse we have property === to description
+            //     if (results.hasOwnProperty(results.data[i].brewery)) {
+            //         // brewery name
+            //         var breweryName = results.data[i].brewery.name;
+            //         // brewery description
+            //         var breweryDescription = results.data[i].brewery.desciprtion;
+            //         return console.log("name: " + breweryName + ", description: " + breweryDescription);
+            //     };
+            //     // if true, push name, description, website, street address object into new empty array called "topBreweries"
+            // }
+
             var breweryName = results.data[i].brewery.name;
-            var breweryDescription = results.data[i].brewery.desciprtion;
-            // is the brewery open to the public? Yes they all are
-            var openToPublic = results.data[i].openToPublic;
-            // var brandClassification = results.data[i].brewery.brandClassification;
+            var breweryDescription = results.data[i].brewery.description;
 
-            // is it a certified craft brewer? - Not a field for all entries
-            // var isCertifiedCraftBrewer = results.data[i].brewery.brewersAssociation.isCertifiedCraftBrewer;
-            // TODO:find out what to do when not a field for all entries
+if (breweryDescription){
+    console.log(breweryName);
+    console.log(breweryDescription);
 
-            if (openToPublic === "Y") {
-                console.log("name: " + i + " " + breweryName);
-                console.log("description: " + breweryDescription)
-                console.log("Open: " + openToPublic);
-                // console.log("brand: " + brandClassification);
 
-                // console.log("certified? " + isCertifiedCraftBrewer);
-            }
+} else {
+    console.log(breweryName);
+    console.log("Some Description");
+
+
+}
+
+
+
+        //     // is the brewery open to the public? Yes they all are
+        //     var openToPublic = results.data[i].openToPublic;
+        //     // var brandClassification = results.data[i].brewery.brandClassification;
+
+        //     // is it a certified craft brewer? - Not a field for all entries
+        //     // var isCertifiedCraftBrewer = results.data[i].brewery.brewersAssociation.isCertifiedCraftBrewer;
+        //     // TODO:find out what to do when not a field for all entries
+
+        //     // if (openToPublic === "Y") {
+        //     //     console.log("name: " + i + " " + breweryName);
+        //     //     console.log("description: " + breweryDescription)
+        //     //     console.log("Open: " + openToPublic);
+
+        //     // }
         }
 
-        // pos1 = {
-        //     lat: position.coords.latitude,
-        //     lng: position.coords.longitude
-        // };
-        // pos2 = {
-        //     lat: position.coords.latitude,
-        //     lng: position.coords.longitude
-        // };
-        // pos3 = {
-        //     lat: position.coords.latitude,
-        //     lng: position.coords.longitude
-        // };
-
-        // infoWindow.setPosition(pos1);
-        // infoWindow.setPosition(pos2);
-        // infoWindow.setPosition(pos3);
 
     });
 };
-
-
-// ==============================================================================================================
