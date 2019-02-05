@@ -1,3 +1,4 @@
+// for kelsey
 var cors = 'https://cors-anywhere.herokuapp.com/';
 
 
