@@ -146,3 +146,26 @@ var cors = 'https://cors-anywhere.herokuapp.com/';
     });
 
 })();
+
+//===================================================
+//Lyft API
+
+function lyft () {
+    // curl -X POST -H "Content-Type: application/json" \
+    //  --user "XDnhhOqwyLGF:92CSNUrJ68OZL_Wmpb75mvFH1AMh6aj_" \
+    //  -d '{"grant_type": "client_credentials", "scope": "public"}' \
+    //  'https://api.lyft.com/oauth/token'
+
+    $.ajax({
+        url: 'https://api.lyft.com/oauth/token',
+        method: 'GET',
+        dataType: 'json',
+        headers: {
+            "Authorization": "Basic " + btoa('XDnhhOqwyLGF' + ":" + '92CSNUrJ68OZL_Wmpb75mvFH1AMh6aj_')
+        }
+    }).then(function (response) {
+        console.log(response);
+    });
+};
+
+lyft().prepend;
