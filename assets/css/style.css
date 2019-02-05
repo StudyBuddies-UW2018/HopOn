@@ -50,14 +50,18 @@ p {
 
 }
 
+.button {
+    border-radius: 1.5rem!important;
+    box-shadow: 1px 1px 10px -1px #888888!important;
+}
 
-#menu {
+/* #menu {
     background-color: #1c374e;
 }
 
 .navItem {
     color: #f9f9f9;
-}
+} */
 
 
 .home-page {
