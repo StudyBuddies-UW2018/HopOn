@@ -27,6 +27,25 @@ p {
     color: #888888;
 }
 
+.home-img {
+    margin-top: 40px;
+}
+
+.home-button {
+    display: block!important;
+    margin: 15px auto 0px auto!important;
+    width: 310px;
+}
+
+#by-location-button {
+    background-color: #cf2b1e;
+}
+
+#browse-button {
+    background-color: #888888;
+}
+
+
 #menu {
     background-color: #1c374e;
 }
