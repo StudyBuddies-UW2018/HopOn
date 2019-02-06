@@ -157,7 +157,7 @@ function lyft () {
     //  'https://api.lyft.com/oauth/token'
 
     $.ajax({
-        url: 'https://api.lyft.com/oauth/token',
+        url: cors + 'https://api.lyft.com/oauth/token',
         method: 'GET',
         dataType: 'json',
         headers: {
@@ -166,6 +166,24 @@ function lyft () {
     }).then(function (response) {
         console.log(response);
     });
+
+//TODO: Create new auth. token prior to the demo show
+//FIXME: Create cleaner code
+
+    $.ajax({
+        url: cors + 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167',
+        method: 'GET',
+        dataType: 'json',
+        headers: {
+            "Authorization": "Bearer JJUujaMGiPYZELSa054PRbvsLKZWtgGAS7KV5cQtiBf/pGVy32bshjmDEooPOQ8QkvwBjbXqsr6/YuB31ChlG6eqGQdzv5obVqf0kTUdZ8caR52Ut4jgH6U="
+        }
+    }).then(function (response) {
+        console.log(response);
+    });
+
+// curl --include -X GET -H 'Authorization: Bearer LTlpTugbNVO5TTPXmElE5lokGkzgqLBOd7Bm3xAnEpH7pT3OSYkj9sNCLlxLQZpsMYvLeyMJM5DUYGTnRVOWJhoJ+CO51TqGGDNFUmps0KUolqYYYMWiVdc=' \
+// 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167'
+
 };
 
-lyft().prepend;
+lyft();
