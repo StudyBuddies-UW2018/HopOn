@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- TODO: fix stylization in browser to match the rest of the site. Tad task probably.
+TODO: find error to firebase?
+TODO: add more psuedocode -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Page</title>
+    <!-- Semantic UI -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>   
+</head>
+
+<body>
+    <div class="ui mini form">
+        <div class="two fields">
+            <div class="field">
+                <label>User Name</label>
+
+                <input placeholder="User Name" id="userName" type="text">
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+                <input placeholder="Password" id="password" type="text">
+            </div>
+        </div>
+
+        <div class="ui submit button">Submit</div>
+    </div>
+
+    <!-- FIXME: script tag added for testing remotely in the HTML, move code to main javascript once working -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAX5YgDAquBM8CxrEckXe0MN3XWhWKjeHU",
+            authDomain: "hopon-f4180.firebaseapp.com",
+            databaseURL: "https://hopon-f4180.firebaseio.com",
+            projectId: "hopon-f4180",
+            storageBucket: "hopon-f4180.appspot.com",
+            messagingSenderId: "176317052818"
+        };
+        
+        firebase.initializeApp(config);
+
+        //define the database variable and empty strings for new user information
+        var database = firebase.database();
+            
+        var userName = "";
+        var password = "";
+        
+        //event listner for Username and Password information     
+        $(".button").on("click", function(event){
+            event.preventDefault();
+
+            userName = $("#userName").val().trim();
+            console.log(userName)
+
+            password = $("#password").val().trim();
+            console.log(password)
+
+            database.ref().push({
+                username: userName, 
+                password: password
+            });
+            //clears form after adding information to form
+            $("#userName").val("");
+            $("#password").val("");
+        });
+            
+
+        database.ref().on("value", function(snapshot) {
+
+            // Print the initial data to the console
+            console.log(snapshot.val());
+
+            // Log the value of the various properties
+            console.log(snapshot.val().userName);
+            console.log(snapshot.val().password);
+
+            // If any errors are experienced, log them to console.
+            }, function(errorObject) {
+
+                console.log("The read failed: " + errorObject.code);
+            });
+
+        //function to append new information to user
+        database.ref().on("child_added", function(childSnapShot) {
+            console.log(childSnapShot.val());
+        
+
+        var newUser = childSnapShot.val().username;
+        var newPassword = childSnapShot.val().password;
+        });
+
+    </script> 
+</body>
+</html>
