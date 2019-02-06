@@ -21,27 +21,37 @@ $('#by-location-button').on('click', function () {
 var map, infoWindow, geocoder, lat, lng, pos;
 //TODO: Add global variable for getter and setter for the position
 
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: 38.0000,
+            lng: -97.0000
+        },
+        //How far zoomed in the map is
+        zoom: 4
+    });
+    infoWindow = new google.maps.InfoWindow;
+    geoLocation();
+};
+
 
 var geoLocation = function () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             pos = {
                 lat: position.coords.latitude,
-                lng: position.coords.longitude
+                lng: position.coords.longitude,
             };
-            lat = pos.lat;
-            lng = pos.lng;
 
-            // console.log("pos: " + lat + " " + lng);
             var geoAPIKey = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
             console.log("geoAPIKey: " + geoAPIKey);
             infoWindow.setPosition(pos);
             infoWindow.setContent('You are here');
+            // zoom in on current location
+            map.zoom = 13;
             infoWindow.open(map);
             map.setCenter(pos);
-            // beer();
 
-            // TODO: Get brewery info
         }, function () {
             handleLocationError(true, infoWindow, map.getCenter());
         });
@@ -49,27 +59,6 @@ var geoLocation = function () {
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
     }
-
-
-};
-var googleMapsAPIkey = "AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
-// my apartment lat/lang endpoint
-
-
-function initMap() {
-    // geocoder = new google.maps.Geocoder();
-    //TODO: Change lat./long. to USA
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: {
-            lat: 47.637612499999996,
-            lng: -122.32353949999998
-        },
-        //How far zoomed in the map is
-        zoom: 13
-    });
-    //Unsure of what does this does
-    infoWindow = new google.maps.InfoWindow;
-    geoLocation();
 };
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -144,7 +133,6 @@ var cors = 'https://cors-anywhere.herokuapp.com/';
         </a>`);
         }
     });
-
 })();
 
 //===================================================
