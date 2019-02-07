@@ -1,4 +1,3 @@
-
 // navigate to browse breweries page
 $('#browse-button').on('click', function () {
     window.location.replace('browse.html')
@@ -108,14 +107,14 @@ var cors = 'https://cors-anywhere.herokuapp.com/';
 
             var breweryImage = results.data[i].brewery.images;
 
-            if (typeof breweryImage === 'undefined'){
+            if (typeof breweryImage === 'undefined') {
                 breweryImage = "assets/images/hop.png";
 
             } else {
                 breweryImage = results.data[i].brewery.images.icon;
             }
 
-            $('#brewGallery').append(`<a href="#" iv class="ui card">
+            var card =  `<a href="#" iv class="ui card">
             <div class="extra content">
                 <span class="left floated like">
                     <i class="like icon"></i>
@@ -130,15 +129,22 @@ var cors = 'https://cors-anywhere.herokuapp.com/';
                 <p>${breweryName}</p>
                 <img src="${breweryImage}" width='64' height='64' />
             </div>
-        </a>`);
+        </a>`;
+
+            $('#brewGallery').append(card);
+            
         }
+        $('body').on('click', 'a.ui.card', function(event){
+            event.preventDefault();
+            console.log('click');
+        });
     });
 })();
 
 //===================================================
 //Lyft API
 
-function lyft () {
+function lyft() {
     // curl -X POST -H "Content-Type: application/json" \
     //  --user "XDnhhOqwyLGF:92CSNUrJ68OZL_Wmpb75mvFH1AMh6aj_" \
     //  -d '{"grant_type": "client_credentials", "scope": "public"}' \
@@ -155,8 +161,8 @@ function lyft () {
         console.log(response);
     });
 
-//TODO: Create new auth. token prior to the demo show
-//FIXME: Create cleaner code
+    //TODO: Create new auth. token prior to the demo show
+    //FIXME: Create cleaner code
 
     $.ajax({
         url: cors + 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167',
@@ -169,8 +175,8 @@ function lyft () {
         console.log(response);
     });
 
-// curl --include -X GET -H 'Authorization: Bearer LTlpTugbNVO5TTPXmElE5lokGkzgqLBOd7Bm3xAnEpH7pT3OSYkj9sNCLlxLQZpsMYvLeyMJM5DUYGTnRVOWJhoJ+CO51TqGGDNFUmps0KUolqYYYMWiVdc=' \
-// 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167'
+    // curl --include -X GET -H 'Authorization: Bearer LTlpTugbNVO5TTPXmElE5lokGkzgqLBOd7Bm3xAnEpH7pT3OSYkj9sNCLlxLQZpsMYvLeyMJM5DUYGTnRVOWJhoJ+CO51TqGGDNFUmps0KUolqYYYMWiVdc=' \
+    // 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167'
 
 };
 
