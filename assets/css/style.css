@@ -11,15 +11,20 @@
 */
 
 /* adding our custom font */
-@font-face { font-family: library-3-am; src: url('../fonts/library-3-am/Library-3-am.otf'); } 
-.home-title {
-    font-family: library-3-am!important;
-    color: #cf2b1e!important;
-    font-weight: 600!important;
-    font-size: 4em!important;
+@font-face {
+    font-family: library-3-am;
+    src: url('../fonts/library-3-am/Library-3-am.otf');
 }
 
-h1, h2 {
+.home-title {
+    font-family: library-3-am !important;
+    color: #cf2b1e !important;
+    font-weight: 600 !important;
+    font-size: 4em !important;
+}
+
+h1,
+h2 {
     color: #888888;
 }
 
@@ -32,8 +37,8 @@ p {
 }
 
 .home-button {
-    display: block!important;
-    margin: 15px auto 0px auto!important;
+    display: block !important;
+    margin: 15px auto 0px auto !important;
     width: 310px;
 }
 
@@ -51,8 +56,8 @@ p {
 }
 
 .button {
-    border-radius: 1.5rem!important;
-    box-shadow: 1px 1px 10px -1px #888888!important;
+    border-radius: 1.5rem !important;
+    box-shadow: 1px 1px 10px -1px #888888 !important;
 }
 
 /* #menu {
@@ -71,6 +76,7 @@ p {
 .get-started-button {
     color: white;
 }
+
 /* ==========================  FOOTER  ======================== */
 
 /* TODO: find a better way to select footer. Id's should only be used once */
@@ -97,6 +103,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 
 /* ==========================  ======================== */
 
@@ -146,3 +153,4 @@ body {
   .hidden {
     display: none;
   }
+
