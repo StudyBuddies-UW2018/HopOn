@@ -75,8 +75,10 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 // ==============================================================================================================
 var cors = 'https://cors-anywhere.herokuapp.com/';
-
+console.log('test');
 var brewFunction = function () {
+console.log('test2');
+
     // this endpoint is hitting the Brewery DB webesite directly instead of the sandbox
     // it is using the current location lat/lng to locate breweries within a 10 mi radius
     // 10 mi is the default radius per the documentation
@@ -111,50 +113,40 @@ var brewFunction = function () {
 
             var breweryImage = results.data[i].brewery.images;
 
-            if (typeof breweryImage === 'undefined') {
+            if (typeof breweryImage === 'undefined'){
                 breweryImage = "assets/images/hop.png";
+                var breweryLogo = "assets/images/hop.png";
 
             } else {
                 breweryImage = results.data[i].brewery.images.icon;
+                var breweryLogo = results.data[i].brewery.images.squareMedium;
             }
 
-            var card = `<a href="#" iv class="ui card">
-            <div class="extra content">
-                <span class="left floated like">
-                    <i class="like icon"></i>
-                    Like
-                </span>
-                <span class="right floated star">
-                    <i class="star icon"></i>
-                    Favorite
-                </span>
-            </div>
-            <div class="content center aligned">
-                <p>${breweryName}</p>
-                <img src="${breweryImage}" width='64' height='64' />
-            </div>
-        </a>`;
 
-            $('#brewGallery').append(card);
+            // var card = ;
 
-            // ================
+            $('#brewGallery').append(
+                `<a href="#" class="ui card" data-name="${breweryName}" data-logo="${breweryLogo}">
+                <div class="extra content">
+                    <span class="left floated like">
+                        <i class="like icon"></i>
+                        Like
+                    </span>
+                    <span class="right floated star">
+                        <i class="star icon"></i>
+                        Favorite
+                    </span>
+                </div>
+                <div class="content center aligned">
+                    <p>${breweryName}</p>
+                    <img src="${breweryImage}" width='64' height='64' />
+                </div>
+            </a>`
+
+            );
+
 
             var breweryLocations = function () {
-
-                // ================
-                // marker = new google.maps.Marker({
-                //     map: map,
-                //     draggable: true,
-                //     animation: google.maps.Animation.DROP,
-                //     position: {
-                //        lat: results.data[i].latitude,
-                //         lng: results.data[i].longitude,
-                //     }
-                // });
-                // marker.addListener('click', toggleBounce);
-                // ================
-
-
                 var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
                 var beachMarker = new google.maps.Marker({
                     position: {
@@ -174,51 +166,106 @@ var brewFunction = function () {
             event.preventDefault();
             console.log('click');
         });
-
-        for (var j = 0; j < arrayLength; j++) {
-            breweryName = results.data[i].brewery.name;
-
-        }
     });
 };
+// =================================== MODAL ===========================================//
 
+$('body').on('click', 'a.ui.card', function (event) {
+    event.preventDefault();
+    console.log('click');
+
+
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    modal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        $('.modal').css('display', 'none');
+    } 
+
+    //FIXME: Tad will fix this. 
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            // modal.style.display = "none";
+            $('.modal').css('display', 'none');
+        }
+    }
+
+    // CREATE VARIABLES FOR INDIVIDUAL MODAL CONTENT
+
+    // var brewName = this.data-name;
+    var brewName = this.getAttribute("data-name");
+    console.log("brewName=" + brewName);
+
+    var brewLogo = this.getAttribute("data-logo");
+
+
+    var modal =
+        `<div class="ui middle aligned center aligned grid home-page">
+        <div class="column">
+            <div class="ui text container">
+                <h1 class="ui">
+                    ${brewName}
+                </h1>
+                <img src="${brewLogo}" alt="brewery logo">
+                <p>insert brewery description if description exists</p>
+
+                <!-- Button to go to brewery website -->
+                <div class="ui huge primary button home-button" id="brewery-site-button">Visit website</div>
+                <br>
+                <p>Drink responsibly. Get a ride! <i class="fas fa-car-side"></i></p>
+                <!-- Lyft button -->
+                <div class="ui huge primary button home-button" id="lyft-button">Lyft Button</div>
+            </div>
+        </div>
+    </div>`
+    $('.modal-info').html(modal);
+
+});
 //===================================================
 //Lyft API
 
-function lyft() {
-    // curl -X POST -H "Content-Type: application/json" \
-    //  --user "XDnhhOqwyLGF:92CSNUrJ68OZL_Wmpb75mvFH1AMh6aj_" \
-    //  -d '{"grant_type": "client_credentials", "scope": "public"}' \
-    //  'https://api.lyft.com/oauth/token'
+// function lyft() {
+//     // curl -X POST -H "Content-Type: application/json" \
+//     //  --user "XDnhhOqwyLGF:92CSNUrJ68OZL_Wmpb75mvFH1AMh6aj_" \
+//     //  -d '{"grant_type": "client_credentials", "scope": "public"}' \
+//     //  'https://api.lyft.com/oauth/token'
 
-    $.ajax({
-        url: cors + 'https://api.lyft.com/oauth/token',
-        method: 'GET',
-        dataType: 'json',
-        headers: {
-            "Authorization": "Basic " + btoa('XDnhhOqwyLGF' + ":" + '92CSNUrJ68OZL_Wmpb75mvFH1AMh6aj_')
-        }
-    }).then(function (response) {
-        console.log(response);
-    });
+//     $.ajax({
+//         url: cors + 'https://api.lyft.com/oauth/token',
+//         method: 'GET',
+//         dataType: 'json',
+//         headers: {
+//             "Authorization": "Basic " + btoa('XDnhhOqwyLGF' + ":" + '92CSNUrJ68OZL_Wmpb75mvFH1AMh6aj_')
+//         }
+//     }).then(function (response) {
+//         console.log(response);
+//     });
 
-    //TODO: Create new auth. token prior to the demo show
-    //FIXME: Create cleaner code
+//     //TODO: Create new auth. token prior to the demo show
+//     //FIXME: Create cleaner code
 
-    $.ajax({
-        url: cors + 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167',
-        method: 'GET',
-        dataType: 'json',
-        headers: {
-            "Authorization": "Bearer JJUujaMGiPYZELSa054PRbvsLKZWtgGAS7KV5cQtiBf/pGVy32bshjmDEooPOQ8QkvwBjbXqsr6/YuB31ChlG6eqGQdzv5obVqf0kTUdZ8caR52Ut4jgH6U="
-        }
-    }).then(function (response) {
-        console.log(response);
-    });
+//     $.ajax({
+//         url: cors + 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167',
+//         method: 'GET',
+//         dataType: 'json',
+//         headers: {
+//             "Authorization": "Bearer JJUujaMGiPYZELSa054PRbvsLKZWtgGAS7KV5cQtiBf/pGVy32bshjmDEooPOQ8QkvwBjbXqsr6/YuB31ChlG6eqGQdzv5obVqf0kTUdZ8caR52Ut4jgH6U="
+//         }
+//     }).then(function (response) {
+//         console.log(response);
+//     });
 
-    // curl --include -X GET -H 'Authorization: Bearer LTlpTugbNVO5TTPXmElE5lokGkzgqLBOd7Bm3xAnEpH7pT3OSYkj9sNCLlxLQZpsMYvLeyMJM5DUYGTnRVOWJhoJ+CO51TqGGDNFUmps0KUolqYYYMWiVdc=' \
-    // 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167'
+//     // curl --include -X GET -H 'Authorization: Bearer LTlpTugbNVO5TTPXmElE5lokGkzgqLBOd7Bm3xAnEpH7pT3OSYkj9sNCLlxLQZpsMYvLeyMJM5DUYGTnRVOWJhoJ+CO51TqGGDNFUmps0KUolqYYYMWiVdc=' \
+//     // 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167'
 
-};
+// };
 
-lyft();
+// lyft();
