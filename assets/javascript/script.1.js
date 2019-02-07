@@ -76,7 +76,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 // ==============================================================================================================
 var cors = 'https://cors-anywhere.herokuapp.com/';
 
-var brewFunction = function () { 
+var brewFunction = function () {
     // this endpoint is hitting the Brewery DB webesite directly instead of the sandbox
     // it is using the current location lat/lng to locate breweries within a 10 mi radius
     // 10 mi is the default radius per the documentation
@@ -140,6 +140,21 @@ var brewFunction = function () {
             // ================
 
             var breweryLocations = function () {
+
+                // ================
+                // marker = new google.maps.Marker({
+                //     map: map,
+                //     draggable: true,
+                //     animation: google.maps.Animation.DROP,
+                //     position: {
+                //        lat: results.data[i].latitude,
+                //         lng: results.data[i].longitude,
+                //     }
+                // });
+                // marker.addListener('click', toggleBounce);
+                // ================
+
+
                 var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
                 var beachMarker = new google.maps.Marker({
                     position: {
@@ -152,12 +167,6 @@ var brewFunction = function () {
             }
             breweryLocations();
         };
-
-
-
-
-
-        // ================
 
 
 
