@@ -17,8 +17,10 @@ $('#by-location-button').on('click', function () {
 // prompted by your browser. If you see the error "The Geolocation service
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
-var map, infoWindow, geocoder, lat, lng, pos;
+var map, infoWindow, geocoder, lat, lng, pos, currentLat, currentLng;
 //TODO: Add global variable for getter and setter for the position
+
+
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -41,6 +43,8 @@ var geoLocation = function () {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
             };
+            currentLat = pos.lat;
+            currentLng = pos.lng;
 
             var geoAPIKey = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
             console.log("geoAPIKey: " + geoAPIKey);
@@ -50,6 +54,7 @@ var geoLocation = function () {
             map.zoom = 13;
             infoWindow.open(map);
             map.setCenter(pos);
+            brewFunction();
 
         }, function () {
             handleLocationError(true, infoWindow, map.getCenter());
@@ -71,13 +76,12 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 // ==============================================================================================================
 var cors = 'https://cors-anywhere.herokuapp.com/';
 
-(function () {
-    // geoLocation();
-
+var brewFunction = function () {
     // this endpoint is hitting the Brewery DB webesite directly instead of the sandbox
     // it is using the current location lat/lng to locate breweries within a 10 mi radius
     // 10 mi is the default radius per the documentation
-    var queryURL2 = cors + 'https://www.brewerydb.com/browse/map/get-breweries?lat=' + '47.637612499999996' + '&lng=' + '-122.32353949999998';
+    console.log('current lat and lng ' + currentLat + currentLng);
+    var queryURL2 = cors + 'https://www.brewerydb.com/browse/map/get-breweries?lat=' + currentLat + '&lng=' + currentLng;
     console.log(queryURL2);
     // console.log("Current lat + lng: " + lat + lng);
 
@@ -114,7 +118,7 @@ var cors = 'https://cors-anywhere.herokuapp.com/';
                 breweryImage = results.data[i].brewery.images.icon;
             }
 
-            var card =  `<a href="#" iv class="ui card">
+            var card = `<a href="#" iv class="ui card">
             <div class="extra content">
                 <span class="left floated like">
                     <i class="like icon"></i>
@@ -132,14 +136,51 @@ var cors = 'https://cors-anywhere.herokuapp.com/';
         </a>`;
 
             $('#brewGallery').append(card);
-            
-        }
-        $('body').on('click', 'a.ui.card', function(event){
+
+            // ================
+
+            var breweryLocations = function () {
+
+                // ================
+                // marker = new google.maps.Marker({
+                //     map: map,
+                //     draggable: true,
+                //     animation: google.maps.Animation.DROP,
+                //     position: {
+                //        lat: results.data[i].latitude,
+                //         lng: results.data[i].longitude,
+                //     }
+                // });
+                // marker.addListener('click', toggleBounce);
+                // ================
+
+
+                var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+                var beachMarker = new google.maps.Marker({
+                    position: {
+                        lat: results.data[i].latitude,
+                        lng: results.data[i].longitude,
+                    },
+                    map: map,
+                    icon: image
+                });
+            }
+            breweryLocations();
+        };
+
+
+
+        $('body').on('click', 'a.ui.card', function (event) {
             event.preventDefault();
             console.log('click');
         });
+
+        for (var j = 0; j < arrayLength; j++) {
+            breweryName = results.data[i].brewery.name;
+
+        }
     });
-})();
+};
 
 //===================================================
 //Lyft API
