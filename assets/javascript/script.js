@@ -1,4 +1,3 @@
-
 // navigate to browse breweries page
 $('#browse-button').on('click', function () {
     window.location.replace('browse.html')
@@ -108,7 +107,7 @@ var cors = 'https://cors-anywhere.herokuapp.com/';
 
             var breweryImage = results.data[i].brewery.images;
 
-            if (typeof breweryImage === 'undefined'){
+            if (typeof breweryImage === 'undefined') {
                 breweryImage = "assets/images/hop.png";
 
             } else {
@@ -138,40 +137,37 @@ var cors = 'https://cors-anywhere.herokuapp.com/';
 //===================================================
 //Lyft API
 
-function lyft () {
-    // curl -X POST -H "Content-Type: application/json" \
-    //  --user "XDnhhOqwyLGF:92CSNUrJ68OZL_Wmpb75mvFH1AMh6aj_" \
-    //  -d '{"grant_type": "client_credentials", "scope": "public"}' \
-    //  'https://api.lyft.com/oauth/token'
-
-    $.ajax({
-        url: cors + 'https://api.lyft.com/oauth/token',
-        method: 'GET',
-        dataType: 'json',
-        headers: {
-            "Authorization": "Basic " + btoa('XDnhhOqwyLGF' + ":" + '92CSNUrJ68OZL_Wmpb75mvFH1AMh6aj_')
-        }
-    }).then(function (response) {
-        console.log(response);
-    });
-
-//TODO: Create new auth. token prior to the demo show
-//FIXME: Create cleaner code
-
-    $.ajax({
-        url: cors + 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167',
-        method: 'GET',
-        dataType: 'json',
-        headers: {
-            "Authorization": "Bearer JJUujaMGiPYZELSa054PRbvsLKZWtgGAS7KV5cQtiBf/pGVy32bshjmDEooPOQ8QkvwBjbXqsr6/YuB31ChlG6eqGQdzv5obVqf0kTUdZ8caR52Ut4jgH6U="
-        }
-    }).then(function (response) {
-        console.log(response);
-    });
-
-// curl --include -X GET -H 'Authorization: Bearer LTlpTugbNVO5TTPXmElE5lokGkzgqLBOd7Bm3xAnEpH7pT3OSYkj9sNCLlxLQZpsMYvLeyMJM5DUYGTnRVOWJhoJ+CO51TqGGDNFUmps0KUolqYYYMWiVdc=' \
-// 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167'
-
+/**
+ * Immediately-invoked function expression that configures and instantiates a lyftWebButton.
+ * @param {Object} options object for configuring the button (see README.md)
+ */
+var OPTIONS = {
+    scriptSrc: 'assets/javascript/lyftWebButton.min.js',
+    namespace: '',
+    clientId: 'XDnhhOqwyLGF',
+    clientToken: 'JJUujaMGiPYZELSa054PRbvsLKZWtgGAS7KV5cQtiBf',
+    location: {
+        pickup: {},
+        destination: {
+            latitude: '47.612720',
+            longitude: '-122.320270',
+        },
+    },
+    parentElement: document.getElementById('lyft-web-button-parent'),
+    queryParams: {
+        credits: ''
+    },
+    theme: 'mulberry-dark large',
 };
-
-lyft();
+(function (t) {
+    var n = this.window,
+        e = this.document;
+    n.lyftInstanceIndex = n.lyftInstanceIndex || 0;
+    var a = t.parentElement,
+        c = e.createElement("script");
+    c.async = !0, c.onload = function () {
+        n.lyftInstanceIndex++;
+        var e = t.namespace ? "lyftWebButton" + t.namespace + n.lyftInstanceIndex : "lyftWebButton" + n.lyftInstanceIndex;
+        n[e] = n.lyftWebButton, t.objectName = e, n[e].initialize(t)
+    }, c.src = t.scriptSrc, a.insertBefore(c, a.childNodes[0])
+}).call(this, OPTIONS);
