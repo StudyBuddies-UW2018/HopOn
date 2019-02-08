@@ -75,10 +75,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 // ==============================================================================================================
 var cors = 'https://cors-anywhere.herokuapp.com/';
-console.log('test');
 var brewFunction = function () {
-console.log('test2');
-
     // this endpoint is hitting the Brewery DB webesite directly instead of the sandbox
     // it is using the current location lat/lng to locate breweries within a 10 mi radius
     // 10 mi is the default radius per the documentation
@@ -118,7 +115,7 @@ console.log('test2');
             if (!breweryURL) {
                 breweryURL = "NO-URL";
             }
-            console.log(breweryURL);
+            // console.log(breweryURL);
 
             var breweryImage = results.data[i].brewery.images;
             
@@ -226,12 +223,7 @@ $('body').on('click', 'a.ui.card', function (event) {
                 </h1>
                 <img src="${brewLogo}" alt="brewery logo">
 
-                <p>${brewDesc}</p>
-
-                <br>
-                <p>Drink responsibly. Get a ride! <i class="fas fa-car-side"></i></p>
-                <!-- Lyft button -->
-                <div class="ui huge primary button home-button" id="lyft-button">Lyft Button</div>
+                <p>${brewDesc}</p>                
             </div>
         </div>
     </div>`;
@@ -245,6 +237,14 @@ $('body').on('click', 'a.ui.card', function (event) {
 
         `);
     }
+
+    $('.modal-info').append(`
+        <br>
+        <p id="lyft-desc">Drink responsibly. Get a ride! <i class="fas fa-car-side"></i></p>
+        <!-- Lyft button -->
+        <div id="lyft-web-button-parent"></div>
+
+        `);
 
 });
 
@@ -287,3 +287,4 @@ var OPTIONS = {
         n[e] = n.lyftWebButton, t.objectName = e, n[e].initialize(t)
     }, c.src = t.scriptSrc, a.insertBefore(c, a.childNodes[0])
 }).call(this, OPTIONS);
+//==============================================END Lyft API ==============================================//
