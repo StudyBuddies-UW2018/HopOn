@@ -2,40 +2,31 @@
 <html lang="en">
 
 <head>
-
     <!-- Standard Meta -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>Brew App</title>
-
+    <title>Contact Us</title>
     <!-- Semantic UI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <!-- css -->
     <link href="assets/css/style.css" type="text/css" rel="stylesheet">
-    <!-- fontaweosme -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-
 </head>
 
 <body>
-    <div class="content">
+    <div class="content"> 
         <!-- NavBar -->
         <div class="ui secondary menu" id="menu">
-            <a class="item" href="index.html">
+            <a class="active item" href="index.html">
                 <p class="navItem">Home</p>
-            </a>
-            <a class="item" href="login.html">
-                <p class="navItem">Sign In</p>
             </a>
             <a class="item" href="#">
                 <p class="navItem">About</p>
             </a>
             <a class="item" href="browse.html">
-                <p class="active navItem">Browse</p>
+                <p class="navItem">Browse</p>
             </a>
             <a class="item" href="contactUs.html">
                 <p class="navItem">Contact Us</p>
@@ -43,41 +34,33 @@
         </div>
         <!-- NavBar End -->
         <!-- Main Page Content -->
-        <div class="ui conatiner">
-            <div class="ui middle aligned center aligned grid">
+        <div class="ui container">
+            <div class="ui middle aligned center aligned grid home-page">
                 <div class="column">
-                    <div class="ui sizer vertical segment">
-                        <div class="ui huge header">Browse Nearby</div>
-                        <p></p>
+                    <div class="ui text container">
+                        <h1 class="ui home-title">
+                            Hop On!
+                        </h1>
+                        <h2>Getting you from A to Beer!</h2>
+                        <p id="home-text">Explore breweries nearby, save your favorites, and call a Lyft directly from our web app.</p>
+                        <!-- Gallery of Breweries -->
+                        <div class="ui huge primary button home-button" id="browse-button">Browse Nearby</div>
                     </div>
+                    <img class="home-img" src="assets/images/hop.png" alt="hop graphic">
                 </div>
-            </div>
-            
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <div class='modal-info'></div>
-                </div>
-            </div>
-
-            <!-- Browse Gallery -->
-            <div class="ui container">
-                <!-- map -->
-                <div id="map"></div>
-                <!-- map end -->
-                <!-- brewery cards -->
-                <div class="ui four cards" id="brewGallery"></div>
-                <!-- brewery card end -->
             </div>
         </div>
+
     </div>
     <!-- footer -->
     <div class="ui inverted vertical footer segment">
         <div class="ui center aligned container">
             <div class="seven wide column">
                 <i class="beer icon ui centered"></i>
+                <!-- <i class="twitter icon ui centered"></i>
+                <i class="github icon ui centered"></i>
+                <i class="facebook icon ui centered"></i>
+                <i class="linkedin icon ui centered"></i> -->
             </div>
             <div class="ui horizontal inverted small divided link list">
                 <a class="item" href="file:///C:/Users/nicol/Documents/FarmerApp/location.html">Site Map</a>
@@ -93,10 +76,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Semantic UI script -->
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-    <!-- Google API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY&callback=initMap">
-    </script>
-
     <!-- Our JS script -->
     <script src="assets/javascript/script.js"></script>
 </body>
