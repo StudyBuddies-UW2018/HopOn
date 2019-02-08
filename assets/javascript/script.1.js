@@ -1,69 +1,26 @@
-// navigate to browse breweries page
-$('#browse-button').on('click', function () {
-    window.location.replace('browse.html')
+var map, infoWindow, geocoder, lat, lng, pos;
 
-});
-
-// navigate to search by location
-$('#by-location-button').on('click', function () {
-    console.log('click');
-    window.location.replace('location.html')
-
-});
-
-// ==============================================================================================================
-
-// Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see the error "The Geolocation service
-// failed.", it means you probably did not give permission for the browser to
-// locate you.
-var map, infoWindow, geocoder, lat, lng, pos, currentLat, currentLng;
-//TODO: Add global variable for getter and setter for the position
-
-
-
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: {
-            lat: 38.0000,
-            lng: -97.0000
-        },
-        //How far zoomed in the map is
-        zoom: 4
-    });
-    infoWindow = new google.maps.InfoWindow;
-    geoLocation();
-};
-
-
-var geoLocation = function () {
+var browseInit = function () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
             };
-            currentLat = pos.lat;
-            currentLng = pos.lng;
-
-            var geoAPIKey = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY";
-            console.log("geoAPIKey: " + geoAPIKey);
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('You are here');
-            // zoom in on current location
-            map.zoom = 13;
-            infoWindow.open(map);
-            map.setCenter(pos);
+            lat = pos.lat;
+            lng = pos.lng;
+            console.log("bi " + lat + lng);
             brewFunction();
 
         }, function () {
-            handleLocationError(true, infoWindow, map.getCenter());
+            $('#brewGallery').append(`<h2>You have elected not to HopOn</h2>`);
         });
     } else {
         // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
+        handleLocationError(false, map.getCenter());
     }
 };
+browseInit();
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
@@ -77,14 +34,9 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 var cors = 'https://cors-anywhere.herokuapp.com/';
 
 var brewFunction = function () {
-    // this endpoint is hitting the Brewery DB webesite directly instead of the sandbox
-    // it is using the current location lat/lng to locate breweries within a 10 mi radius
-    // 10 mi is the default radius per the documentation
-    console.log('current lat and lng ' + currentLat + currentLng);
-    var queryURL2 = cors + 'https://www.brewerydb.com/browse/map/get-breweries?lat=' + currentLat + '&lng=' + currentLng;
-    console.log(queryURL2);
-    // console.log("Current lat + lng: " + lat + lng);
 
+    // find breweries within a 10mi raidus of your current location
+    var queryURL2 = cors + 'https://www.brewerydb.com/browse/map/get-breweries?lat=' + lat + '&lng=' + lng;
 
     $.ajax({
         url: queryURL2,
@@ -96,8 +48,6 @@ var brewFunction = function () {
         console.log(results);
 
         var arrayLength = results.totalResults;
-        console.log("array length: " + arrayLength);
-
 
         // loop through array
         for (var i = 0; i < arrayLength; i++) {
@@ -113,50 +63,36 @@ var brewFunction = function () {
 
             if (typeof breweryImage === 'undefined') {
                 breweryImage = "assets/images/hop.png";
+                var breweryLogo = "assets/images/hop.png";
 
             } else {
                 breweryImage = results.data[i].brewery.images.icon;
+                var breweryLogo = results.data[i].brewery.images.squareMedium;
             }
 
-            var card = `<a href="#" iv class="ui card">
-            <div class="extra content">
-                <span class="left floated like">
-                    <i class="like icon"></i>
-                    Like
-                </span>
-                <span class="right floated star">
-                    <i class="star icon"></i>
-                    Favorite
-                </span>
-            </div>
-            <div class="content center aligned">
-                <p>${breweryName}</p>
-                <img src="${breweryImage}" width='64' height='64' />
-            </div>
-        </a>`;
+            $('#brewGallery').append(
+                `<a href="#" class="ui card" data-name="${breweryName}" data-logo="${breweryLogo}">
+                <div class="extra content">
+                    <span class="left floated like">
+                        <i class="like icon"></i>
+                        Like
+                    </span>
+                    <span class="right floated star">
+                        <i class="star icon"></i>
+                        Favorite
+                    </span>
+                </div>
+                <div class="content center aligned">
+                    <p>${breweryName}</p>
+                    <img src="${breweryImage}" width='64' height='64' />
+                </div>
+            </a>`
 
-            $('#brewGallery').append(card);
-
-            // ================
-
+            );
+            // mark brewery locations on map
             var breweryLocations = function () {
-
-                // ================
-                // marker = new google.maps.Marker({
-                //     map: map,
-                //     draggable: true,
-                //     animation: google.maps.Animation.DROP,
-                //     position: {
-                //        lat: results.data[i].latitude,
-                //         lng: results.data[i].longitude,
-                //     }
-                // });
-                // marker.addListener('click', toggleBounce);
-                // ================
-
-
                 var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-                var beachMarker = new google.maps.Marker({
+                var marker = new google.maps.Marker({
                     position: {
                         lat: results.data[i].latitude,
                         lng: results.data[i].longitude,
@@ -168,57 +104,70 @@ var brewFunction = function () {
             breweryLocations();
         };
 
-
-
         $('body').on('click', 'a.ui.card', function (event) {
             event.preventDefault();
             console.log('click');
         });
-
-        for (var j = 0; j < arrayLength; j++) {
-            breweryName = results.data[i].brewery.name;
-
-        }
     });
 };
+// =================================== MODAL ===========================================//
 
-//===================================================
-//Lyft API
+$('body').on('click', 'a.ui.card', function (event) {
+    event.preventDefault();
+    console.log('click');
 
-function lyft() {
-    // curl -X POST -H "Content-Type: application/json" \
-    //  --user "XDnhhOqwyLGF:92CSNUrJ68OZL_Wmpb75mvFH1AMh6aj_" \
-    //  -d '{"grant_type": "client_credentials", "scope": "public"}' \
-    //  'https://api.lyft.com/oauth/token'
 
-    $.ajax({
-        url: cors + 'https://api.lyft.com/oauth/token',
-        method: 'GET',
-        dataType: 'json',
-        headers: {
-            "Authorization": "Basic " + btoa('XDnhhOqwyLGF' + ":" + '92CSNUrJ68OZL_Wmpb75mvFH1AMh6aj_')
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    modal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        $('.modal').css('display', 'none');
+    }
+
+    //FIXME: Tad will fix this. 
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            // modal.style.display = "none";
+            $('.modal').css('display', 'none');
         }
-    }).then(function (response) {
-        console.log(response);
-    });
+    }
 
-    //TODO: Create new auth. token prior to the demo show
-    //FIXME: Create cleaner code
+    // CREATE VARIABLES FOR INDIVIDUAL MODAL CONTENT
 
-    $.ajax({
-        url: cors + 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167',
-        method: 'GET',
-        dataType: 'json',
-        headers: {
-            "Authorization": "Bearer JJUujaMGiPYZELSa054PRbvsLKZWtgGAS7KV5cQtiBf/pGVy32bshjmDEooPOQ8QkvwBjbXqsr6/YuB31ChlG6eqGQdzv5obVqf0kTUdZ8caR52Ut4jgH6U="
-        }
-    }).then(function (response) {
-        console.log(response);
-    });
+    // var brewName = this.data-name;
+    var brewName = this.getAttribute("data-name");
+    console.log("brewName=" + brewName);
 
-    // curl --include -X GET -H 'Authorization: Bearer LTlpTugbNVO5TTPXmElE5lokGkzgqLBOd7Bm3xAnEpH7pT3OSYkj9sNCLlxLQZpsMYvLeyMJM5DUYGTnRVOWJhoJ+CO51TqGGDNFUmps0KUolqYYYMWiVdc=' \
-    // 'https://api.lyft.com/v1/eta?lat=37.7833&lng=-122.4167'
+    var brewLogo = this.getAttribute("data-logo");
 
-};
 
-lyft();
+    var modal =
+        `<div class="ui middle aligned center aligned grid home-page">
+        <div class="column">
+            <div class="ui text container">
+                <h1 class="ui">
+                    ${brewName}
+                </h1>
+                <img src="${brewLogo}" alt="brewery logo">
+                <p>insert brewery description if description exists</p>
+
+                <!-- Button to go to brewery website -->
+                <div class="ui huge primary button home-button" id="brewery-site-button">Visit website</div>
+                <br>
+                <p>Drink responsibly. Get a ride! <i class="fas fa-car-side"></i></p>
+                <!-- Lyft button -->
+                <div class="ui huge primary button home-button" id="lyft-button">Lyft Button</div>
+            </div>
+        </div>
+    </div>`
+    $('.modal-info').html(modal);
+
+});
