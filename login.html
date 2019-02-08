@@ -1,25 +1,44 @@
 <!DOCTYPE html>
-<!-- TODO: fix stylization in browser to match the rest of the site. Tad task probably.
-TODO: add more psuedocode -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up & Login Page</title>
+    <title>Register</title>
     <!-- Semantic UI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <!-- CSS -->
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet">
     <!-- Firebase Reference -->
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>   
 </head>
 
 <body>
+    <!-- NavBar -->
+    <div class="ui secondary menu" id="menu">
+        <a class="active item" href="index.html">
+            <p class="navItem">Home</p>
+        </a>
+        <a class="item" href="login.html">
+            <p class="navItem">Sign In</p>
+        </a>
+        <a class="item" href="#">
+            <p class="navItem">About</p>
+        </a>
+        <a class="item" href="browse.html">
+            <p class="navItem">Browse</p>
+        </a>
+        <a class="item" href="contactUs.html">
+            <p class="navItem">Contact Us</p>
+        </a>
+        </div>
+        <!-- NavBar End -->
+    
     <!--Form to enter enter Username and Password-->
     <div class="ui mini form">
         <div class="two fields">
             <div class="field">
                 <label>User Name:</label>
-
                 <input placeholder="User Name" id="userName" type="text">
             </div>
 
@@ -32,7 +51,7 @@ TODO: add more psuedocode -->
         <!--Working Sign Up and Log in buttons-->
         <div class="ui signUp button">Sign up</div>
 
-        <div class="ui login button">Log in</div>
+        <div class="ui login button">Login</div>
     </div>
 
 <!-- FIXME: script tag added for testing remotely in the HTML, move code to main javascript once working -->
@@ -150,22 +169,22 @@ TODO: add more psuedocode -->
 
 <!-- footer -->
 <div class="ui inverted vertical footer segment">
-        <div class="ui center aligned container">
-            <div class="seven wide column">
-                <i class="beer icon ui centered"></i>
-                <!-- <i class="twitter icon ui centered"></i>
-                <i class="github icon ui centered"></i>
-                <i class="facebook icon ui centered"></i>
-                <i class="linkedin icon ui centered"></i> -->
-            </div>
-            <div class="ui horizontal inverted small divided link list">
-                <a class="item" href="file:///C:/Users/nicol/Documents/FarmerApp/location.html">Site Map</a>
-                <a class="item" href="#">Contact Us</a>
-                <a class="item" href="#">Terms and Conditions</a>
-                <a class="item" href="#">Privacy Policy</a>
-            </div>
+    <div class="ui center aligned container">
+        <div class="seven wide column">
+            <i class="beer icon ui centered"></i>
+            <!-- <i class="twitter icon ui centered"></i>
+            <i class="github icon ui centered"></i>
+            <i class="facebook icon ui centered"></i>
+            <i class="linkedin icon ui centered"></i> -->
+        </div>
+        <div class="ui horizontal inverted small divided link list">
+            <a class="item" href="#">Site Map</a>
+            <a class="item" href="#">Contact Us</a>
+            <a class="item" href="#">Terms and Conditions</a>
+            <a class="item" href="#">Privacy Policy</a>
         </div>
     </div>
+</div>
 <!-- end footer -->
 
 </body>
