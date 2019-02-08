@@ -105,14 +105,24 @@ console.log('test2');
         for (var i = 0; i < arrayLength; i++) {
             var breweryName = results.data[i].brewery.name;
             // var openToPublic = results.data[i].openToPublic;
+            
+            // create brewery description variable
             var breweryDescription = results.data[i].brewery.description;
-
             if (!breweryDescription) {
-                breweryDescription = "some description";
+                breweryDescription = " ";
             }
+            // console.log(breweryDescription);
+
+            // create brewery url variable
+            var breweryURL = results.data[i].brewery.website;
+            if (!breweryURL) {
+                breweryURL = "NO-URL";
+            }
+            console.log(breweryURL);
 
             var breweryImage = results.data[i].brewery.images;
-
+            
+            //Set brewery logos in variables to use on browse and modals
             if (typeof breweryImage === 'undefined') {
                 breweryImage = "assets/images/hop.png";
                 var breweryLogo = "assets/images/hop.png";
@@ -126,7 +136,7 @@ console.log('test2');
             // var card = ;
 
             $('#brewGallery').append(
-                `<a href="#" class="ui card" data-name="${breweryName}" data-logo="${breweryLogo}">
+                `<a href="#" class="ui card" data-name="${breweryName}" data-logo="${breweryLogo}" data-desc="${breweryDescription}" data-url="${breweryURL}">
                 <div class="extra content">
                     <span class="left floated like">
                         <i class="like icon"></i>
@@ -170,7 +180,7 @@ console.log('test2');
         });
     });
 };
-// =================================== MODAL ===========================================//
+// ============================================ MODAL ==================================================//
 
 $('body').on('click', 'a.ui.card', function (event) {
     event.preventDefault();
@@ -207,6 +217,8 @@ $('body').on('click', 'a.ui.card', function (event) {
     console.log("brewName=" + brewName);
 
     var brewLogo = this.getAttribute("data-logo");
+    var brewDesc = this.getAttribute("data-desc");
+    var brewURL = this.getAttribute("data-url");
 
 
     var modal =
@@ -217,22 +229,34 @@ $('body').on('click', 'a.ui.card', function (event) {
                     ${brewName}
                 </h1>
                 <img src="${brewLogo}" alt="brewery logo">
-                <p>insert brewery description if description exists</p>
 
-                <!-- Button to go to brewery website -->
-                <div class="ui huge primary button home-button" id="brewery-site-button">Visit website</div>
+                <p>${brewDesc}</p>
+
                 <br>
                 <p>Drink responsibly. Get a ride! <i class="fas fa-car-side"></i></p>
                 <!-- Lyft button -->
                 <div class="ui huge primary button home-button" id="lyft-button">Lyft Button</div>
             </div>
         </div>
-    </div>`
+    </div>`;
     $('.modal-info').html(modal);
 
+    if (brewURL !== "NO-URL") {
+        $('.modal-info').append(`
+
+                        <a href="${brewURL}" target="_blank" class="brewURLButton">
+                                    <div class="ui huge primary button home-button" id="brewery-site-button">Visit website</div>
+                        </a>
+
+        `);
+    }
+
 });
-//===================================================
-//Lyft API
+
+// ============================================ END MODAL ==============================================//
+
+
+//==============================================Lyft API ==============================================//
 
 /**
  * Immediately-invoked function expression that configures and instantiates a lyftWebButton.
