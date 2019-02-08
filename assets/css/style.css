@@ -1,3 +1,19 @@
+html, body {
+    height: 100%;
+  }
+
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto;
+
+}
+
 /* the centering on the page */
 /* 
     gold: #e59a39;
@@ -23,9 +39,15 @@
     font-size: 4em !important;
 }
 
+#home-text {
+    width: 385px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 h1,
 h2 {
-    color: #888888;
+    color: #1c374e;
 }
 
 p {
@@ -42,13 +64,9 @@ p {
     width: 310px;
 }
 
-#by-location-button {
-    background-color: #cf2b1e;
-}
-
 #browse-button {
-    background-color: #888888;
-}
+    background-color: #cf2b1e;
+    margin-top: 50px!important;}
 
 #brewery-site-button {
     background-color: #cf2b1e;
@@ -60,14 +78,22 @@ p {
     box-shadow: 1px 1px 10px -1px #888888 !important;
 }
 
-/* #menu {
+#menu {
     background-color: #1c374e;
+    margin-bottom: 70px;
+    box-shadow: 1px 1px 10px -1px #888888 !important;
 }
 
 .navItem {
     color: #f9f9f9;
-} */
+    font-size: 1.25em;
+    /* color: #1c374e; */
+}
 
+.ui.secondary.menu a.item:hover {
+    background: rgb(148, 148, 148);
+    color: rgba(202, 202, 202, 0.95);
+}
 
 .home-page {
     height: 100%;
@@ -76,6 +102,22 @@ p {
 .get-started-button {
     color: white;
 }
+
+
+#brewGallery {
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+}
+
+.ui.huge.header {
+    font-size: 3em;
+}
+
+.ui.header {
+    color: #1c374e;
+}
+
 
 /* ==========================  FOOTER  ======================== */
 
@@ -87,13 +129,17 @@ p {
     width: 100%;
 } */
 
+
+.ui.inverted.segment {
+    background: #1c374e;
+}
 /* ========================== MAP STYLE ======================== */
 
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #map {
-    height: 400px;
-    width: 600px;
+    height: 350px;
+    width: 100%;
 }
 
 /* Optional: Makes the sample page fill the window. */
