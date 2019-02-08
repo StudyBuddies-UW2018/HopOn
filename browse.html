@@ -19,53 +19,54 @@
 </head>
 
 <body>
-    <!-- NavBar -->
-    <div class="ui secondary  menu" id="menu">
-        <a class="item" href="index.html">
-            <p class="navItem">Home</p>
-        </a>
-        <a class="item" href="#">
-            <p class="navItem">About</p>
-        </a>
-        <a class="item" href="browse.html">
-            <p class="active navItem">Browse</p>
-        </a>
-        <a class="item" href="#">
-            <p class="navItem">Contact Us</p>
-        </a>
-    </div>
-    <!-- NavBar End -->
-    <!-- Main Page Content -->
-    <div class="ui conatiner">
-        <div class="ui middle aligned center aligned grid">
-            <div class="column">
-                <div class="ui sizer vertical segment">
-                    <div class="ui huge header">Browse</div>
-                    <p></p>
+    <div class="content">
+        <!-- NavBar -->
+        <div class="ui secondary  menu" id="menu">
+            <a class="item" href="index.html">
+                <p class="navItem">Home</p>
+            </a>
+            <a class="item" href="#">
+                <p class="navItem">About</p>
+            </a>
+            <a class="item" href="browse.html">
+                <p class="active navItem">Browse</p>
+            </a>
+            <a class="item" href="#">
+                <p class="navItem">Contact Us</p>
+            </a>
+        </div>
+        <!-- NavBar End -->
+        <!-- Main Page Content -->
+        <div class="ui conatiner">
+            <div class="ui middle aligned center aligned grid">
+                <div class="column">
+                    <div class="ui sizer vertical segment">
+                        <div class="ui huge header">Browse Nearby</div>
+                        <p></p>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div class='modal-info'></div>
+            
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class='modal-info'></div>
+                </div>
+            </div>
+
+            <!-- Browse Gallery -->
+            <div class="ui container">
+                <!-- map -->
+                <div id="map"></div>
+                <!-- map end -->
+                <!-- brewery cards -->
+                <div class="ui four cards" id="brewGallery"></div>
+                <!-- brewery card end -->
             </div>
         </div>
-
-        <!-- Browse Gallery -->
-        <div class="ui container">
-            <!-- map -->
-            <div id="map"></div>
-            <!-- map end -->
-            <!-- brewery cards -->
-            <div class="ui four cards" id="brewGallery"></div>
-            <!-- brewery card end -->
-        </div>
     </div>
-
     <!-- footer -->
     <div class="ui inverted vertical footer segment">
         <div class="ui center aligned container">
