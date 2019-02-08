@@ -132,28 +132,24 @@ console.log('test2');
                 var breweryLogo = results.data[i].brewery.images.squareMedium;
             }
 
+            var card = `<a href="#" class="ui card" data-name="${breweryName}" data-logo="${breweryLogo}" data-desc="${breweryDescription}" data-url="${breweryURL}">
+            <div class="extra content">
+                <span class="left floated like">
+                    <i class="like icon"></i>
+                    Like
+                </span>
+                <span class="right floated star">
+                    <i class="star icon"></i>
+                    Favorite
+                </span>
+            </div>
+            <div class="content center aligned">
+                <p>${breweryName}</p>
+                <img src="${breweryImage}" width='64' height='64' />
+            </div>
+        </a>`;
 
-            // var card = ;
-
-            $('#brewGallery').append(
-                `<a href="#" class="ui card" data-name="${breweryName}" data-logo="${breweryLogo}" data-desc="${breweryDescription}" data-url="${breweryURL}">
-                <div class="extra content">
-                    <span class="left floated like">
-                        <i class="like icon"></i>
-                        Like
-                    </span>
-                    <span class="right floated star">
-                        <i class="star icon"></i>
-                        Favorite
-                    </span>
-                </div>
-                <div class="content center aligned">
-                    <p>${breweryName}</p>
-                    <img src="${breweryImage}" width='64' height='64' />
-                </div>
-            </a>`
-
-            );
+            $('#brewGallery').append(card);
 
 
             var breweryLocations = function () {
@@ -243,10 +239,9 @@ $('body').on('click', 'a.ui.card', function (event) {
 
     if (brewURL !== "NO-URL") {
         $('.modal-info').append(`
-
-                        <a href="${brewURL}" target="_blank" class="brewURLButton">
-                                    <div class="ui huge primary button home-button" id="brewery-site-button">Visit website</div>
-                        </a>
+            <a href="${brewURL}" target="_blank" class="brewURLButton">
+               <div class="ui huge primary button home-button" id="brewery-site-button">Visit website</div>
+            </a>
 
         `);
     }

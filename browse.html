@@ -37,75 +37,76 @@
             <p class="navItem">Contact Us</p>
         </a>
     </div>
-
+    <!-- NavBar End -->
     <!-- Main Page Content -->
-    <div class="ui middle aligned center aligned grid">
-        <div class="column">
-            <div class="ui sizer vertical segment">
-                <div class="ui huge header">Browse</div>
-                <p></p>
-            </div>
-
-            <div class="ui search">
-                <div class="ui icon input">
-                    <input class="prompt" id="search-input" type="text" placeholder="Search breweries...">
-                    <i class="search icon"></i>
+    <div class="ui conatiner">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <div class="ui sizer vertical segment">
+                    <div class="ui huge header">Browse</div>
+                    <p></p>
                 </div>
-                <div class="results"></div>
+
+                <!-- <div class="ui search">
+                    <div class="ui icon input">
+                        <input class="prompt" id="search-input" type="text" placeholder="Search breweries...">
+                        <i class="search icon"></i>
+                    </div>
+                    <div class="results"></div>
+                </div> -->
             </div>
+        </div>
 
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class='modal-info'></div>
+            </div>
+        </div>
+
+        <!-- Browse Gallery -->
+        <div class="ui container">
+            <!-- map -->
+            <div id="map"></div>
+            <!-- map end -->
+            <!-- brewery cards -->
+            <div class="ui four cards" id="brewGallery"></div>
+            <!-- brewery card end -->
         </div>
     </div>
-  <!-- The Modal -->
-  <div id="myModal" class="modal">
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <!-- <p>Some text in the Modal..</p> -->
-        <div class='modal-info'>
-            
-        </div>
-    </div>
-
-</div>
-    <!-- Browse Gallery -->
-
-    <div class="hidden" id="map"></div>
-    <div class="ui container">
-        <div class="ui four cards" id="brewGallery"></div>
-    </div>
-
-<!-- footer -->
-<div class="ui inverted vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="seven wide column">
-            <i class="beer icon ui centered"></i>
-            <!-- <i class="twitter icon ui centered"></i>
+    <!-- footer -->
+    <div class="ui inverted vertical footer segment">
+        <div class="ui center aligned container">
+            <div class="seven wide column">
+                <i class="beer icon ui centered"></i>
+                <!-- <i class="twitter icon ui centered"></i>
             <i class="github icon ui centered"></i>
             <i class="facebook icon ui centered"></i>
             <i class="linkedin icon ui centered"></i> -->
-        </div>
-        <div class="ui horizontal inverted small divided link list">
-            <a class="item" href="file:///C:/Users/nicol/Documents/FarmerApp/location.html">Site Map</a>
-            <a class="item" href="#">Contact Us</a>
-            <a class="item" href="#">Terms and Conditions</a>
-            <a class="item" href="#">Privacy Policy</a>
+            </div>
+            <div class="ui horizontal inverted small divided link list">
+                <a class="item" href="file:///C:/Users/nicol/Documents/FarmerApp/location.html">Site Map</a>
+                <a class="item" href="#">Contact Us</a>
+                <a class="item" href="#">Terms and Conditions</a>
+                <a class="item" href="#">Privacy Policy</a>
+            </div>
         </div>
     </div>
-</div>
-<!-- end footer -->
+    <!-- end footer -->
 
     <!-- ajax/jQuery cdn -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Semantic UI script -->
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <!-- Google API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo6UHq_FVsEuafC_nHi57NG1e6X1wEOcY&callback=initMap">
     </script>
-    
+
     <!-- Our JS script -->
-    <script src="assets/javascript/script.1.js"></script>
+    <script src="assets/javascript/script.js"></script>
 </body>
 
 </html>
