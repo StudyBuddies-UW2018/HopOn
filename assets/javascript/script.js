@@ -26,6 +26,9 @@ function initMap() {
     });
     infoWindow = new google.maps.InfoWindow;
     geoLocation();
+
+
+
 };
 
 
@@ -66,7 +69,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.open(map);
 }
 
-// ==============================================================================================================
+// ============================= AJAX CALL AND CREATING BREWERY CARDS ====================================//
 var cors = 'https://cors-anywhere.herokuapp.com/';
 var brewFunction = function () {
     // this endpoint is hitting the Brewery DB webesite directly instead of the sandbox
@@ -153,11 +156,22 @@ var brewFunction = function () {
                 var beachMarker = new google.maps.Marker({
                     position: {
                         lat: results.data[i].latitude,
-                        lng: results.data[i].longitude,
+                        lng: results.data[i].longitude
                     },
                     map: map,
-                    icon: image
+                    icon: image,
+                    name: results.data[i].brewery.name,
+                    logo: breweryImage
+
                 });
+                beachMarker.addListener('click', function() {
+                    console.log('YOU CLICKED A BEACH MARKER');
+                    infoWindow.setPosition(this.position);
+                    infoWindow.setContent("<div style='float:unset'><img class='map-logo' src='" + this.logo + "'></div>" + this.name);
+                    infoWindow.open(map);
+
+                });
+
             }
             breweryLocations();
         };
@@ -170,8 +184,29 @@ var brewFunction = function () {
             event.preventDefault();
             console.log('click');
         });
+
+        
+
     });
 };
+
+// ==========================END AJAX CALL AND CREATING BREWERY CARDS ================================//
+
+// =================================== ON CLICK FOR MAP ===============================================//
+
+//                  DELETE ALL THIS
+
+// $('body').on('click', beachMarker, function (event) {
+//     event.preventDefault();
+//     console.log('YOU CLICKED A BEACH MARKER');
+//     infoWindow.setPosition(this.position);
+//     // infoWindow.setContent(this.name);
+//     infoWindow.setContent("HEY");
+//     infoWindow.open(map);
+// });
+
+// =================================== END ON CLICK FOR MAP ============================================//
+
 
 // ============================================ MODAL ==================================================//
 
