@@ -1,7 +1,5 @@
 <!-- Nicole's test register test/attached to firebase -->
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,21 +47,21 @@
           <form class="ui form attached fluid segment">
             <div class="two fields">
               <div class="field">
-                <label>First Name</label>
-                <input placeholder="First Name" type="text">
+                <label>First Name:</label>
+                <input placeholder="First Name" id=firstName type="text">
               </div>
               <div class="field">
-                <label>Last Name</label>
-                <input placeholder="Last Name" type="text">
+                <label>Last Name:</label>
+                <input placeholder="Last Name" id=lastName type="text">
               </div>
             </div>
             <div class="field">
-              <label>Username</label>
-              <input placeholder="Username" type="text">
+              <label>Username:</label>
+              <input placeholder="Username" id=userName type="text">
             </div>
             <div class="field">
-              <label>Password</label>
-              <input type="password">
+              <label>Password:</label>
+              <input placeholder="Password" id=password input type="password">
             </div>
             <div class="inline field">
               <div class="ui checkbox">
@@ -71,14 +69,126 @@
                 <label for="terms">I agree to the terms and conditions</label>
               </div>
             </div>
-            <div class="ui blue submit button">Submit</div>
+            <div class="ui blue submit button" id=submit>Submit</div>
           </form>
           <div class="ui bottom attached warning message">
             <i class="icon help"></i>
-            Already signed up? <a href="login.html">Login here</a> instead.
+            Already signed up with us? <a href="login.html">Login here</a> instead.
           </div>
           <br>
 </div>
+
+<script>
+
+   // Initialize Firebase
+   var config = {
+    apiKey: "AIzaSyAX5YgDAquBM8CxrEckXe0MN3XWhWKjeHU",
+    authDomain: "hopon-f4180.firebaseapp.com",
+    databaseURL: "https://hopon-f4180.firebaseio.com",
+    projectId: "hopon-f4180",
+    storageBucket: "hopon-f4180.appspot.com",
+    messagingSenderId: "176317052818"
+};
+    
+firebase.initializeApp(config);
+
+//define the database variable and empty strings for new user information
+var database = firebase.database();
+        
+var firstName = "";
+var lastName = "";
+var userName = "";
+var password = "";
+
+
+//event handler for submit button
+$(".submit").on("click", function(event){
+    event.preventDefault();
+
+    firstName = $("#firstName").val().trim();
+    console.log(firstName)
+
+    lastName = $("#lastName").val().trim();
+    console.log(lastName)
+
+    userName = $("#userName").val().trim();
+    console.log(userName)
+
+    password = $("#password").val().trim();
+    console.log(password)
+
+    database.ref("/users").once("value", function(snapshot){
+        var snapShot = snapshot.val()
+
+        for (var key in snapShot) {
+            console.log(snapShot[key].username)
+            // snapShot[key].password === password
+            //create if/ else/ else if statements to match usernames to passwords
+        };
+    });
+});
+
+//event listner for Username and Password information     
+$(".submit").on("click", function(event){
+    event.preventDefault();
+
+    //Clears extra space after entering user information
+
+    firstName = $("#firstName").val().trim();
+    console.log(firstName)
+
+    lastName = $("#lastName").val().trim();
+    console.log(lastName)
+
+    userName = $("#userName").val().trim();
+    console.log(userName)
+
+    password = $("#password").val().trim();
+    console.log(password)
+
+    //Pushes into a user folder in firebase
+    database.ref("/users").push({
+        first: firstName,
+        last: lastName,
+        username: userName, 
+        password: password
+     });
+    
+    //Clears form after adding information to form
+    $("#firstName").val("");
+    $("#lastName").val("");
+    $("#userName").val("");
+    $("#password").val("");
+});
+        
+
+database.ref().on("value", function(snapshot) {
+
+    // Print the initial data to the console
+    console.log(snapshot.val());
+
+    // Log the value of the various properties
+    console.log(snapshot.val().firstName);
+    console.log(snapshot.val().lastName);
+    console.log(snapshot.val().userName);
+    console.log(snapshot.val().password);
+
+    // If any errors are experienced, log them to console.
+    }, function(errorObject) {
+
+        console.log("The read failed: " + errorObject.code);
+ });
+
+//function to append new information to user
+database.ref().on("child_added", function(childSnapShot) {
+    console.log(childSnapShot.val());
+    
+
+    var newUser = childSnapShot.val().username;
+    var newPassword = childSnapShot.val().password;
+});
+
+</script>
 <!-- footer -->
 <div class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
@@ -102,7 +212,7 @@
 <!-- ajax/jQuery cdn -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Our JS script -->
-<script src="assets/javascript/script.js"></script>
+<!-- <script src="assets/javascript/script.js"></script> -->
 
 </body>
 </html>
