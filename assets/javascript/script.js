@@ -4,13 +4,6 @@ $('#browse-button').on('click', function () {
 
 });
 
-// navigate to search by location
-$('#by-location-button').on('click', function () {
-    console.log('click');
-    window.location.replace('location.html')
-
-});
-
 // ==============================================================================================================
 
 // Note: This example requires that you consent to location sharing when
@@ -129,7 +122,11 @@ var brewFunction = function () {
                 var breweryLogo = results.data[i].brewery.images.squareMedium;
             }
 
-            var card = `<a href="#" class="ui card" data-name="${breweryName}" data-logo="${breweryLogo}" data-desc="${breweryDescription}" data-url="${breweryURL}">
+            var breweryLat = results.data[i].latitude;
+            var breweryLong = results.data[i].longitude;
+
+
+            var card = `<div class="ui card" data-name="${breweryName}" data-logo="${breweryLogo}" data-desc="${breweryDescription}" data-url="${breweryURL}" data-lat="${breweryLat}" data-long="${breweryLong}">
             <div class="extra content">
                 <span class="left floated like">
                     <i class="like icon"></i>
@@ -141,10 +138,12 @@ var brewFunction = function () {
                 </span>
             </div>
             <div class="content center aligned">
-                <p>${breweryName}</p>
-                <img src="${breweryImage}" width='64' height='64' />
+                <a href="brewery.html">
+                    <p>${breweryName}</p>
+                    <img src="${breweryImage}" width='64' height='64' />
+                </a>
             </div>
-        </a>`;
+        </div>`;
 
             $('#brewGallery').append(card);
 
@@ -173,37 +172,14 @@ var brewFunction = function () {
         });
     });
 };
+
 // ============================================ MODAL ==================================================//
 
-$('body').on('click', 'a.ui.card', function (event) {
+$('body').on('click', 'div.ui.card', function (event) {
     event.preventDefault();
-    console.log('click');
 
 
-    // Get the modal
-    var modal = document.getElementById('myModal');
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal
-    modal.style.display = "block";
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        $('.modal').css('display', 'none');
-    } 
-
-    //FIXME: Tad will fix this. 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            // modal.style.display = "none";
-            $('.modal').css('display', 'none');
-        }
-    }
-
-    // CREATE VARIABLES FOR INDIVIDUAL MODAL CONTENT
+    // CREATE VARIABLES FOR INDIVIDUAL BREWERY CONTENT
 
     // var brewName = this.data-name;
     var brewName = this.getAttribute("data-name");
@@ -212,7 +188,21 @@ $('body').on('click', 'a.ui.card', function (event) {
     var brewLogo = this.getAttribute("data-logo");
     var brewDesc = this.getAttribute("data-desc");
     var brewURL = this.getAttribute("data-url");
+    var brewLat = this.getAttribute("data-lat");
+    var brewLong = this.getAttribute("data-long");
 
+    if (typeof(Storage) !== "undefined") {
+        console.log("Code for localStorage/sessionStorage.");
+        localStorage.setItem("brewName", brewName);
+        localStorage.setItem("brewLat", brewLat);
+        localStorage.setItem("brewLong", brewLong);
+        localStorage.setItem("brewLogo", brewLogo);
+        localStorage.setItem("brewDesc", brewDesc);
+        localStorage.setItem("brewURL", brewURL);
+
+    } else {
+        console.log("Sorry! No Web Storage support..");
+    }
 
     var modal =
         `<div class="ui middle aligned center aligned grid home-page">
@@ -222,69 +212,29 @@ $('body').on('click', 'a.ui.card', function (event) {
                     ${brewName}
                 </h1>
                 <img src="${brewLogo}" alt="brewery logo">
-
                 <p>${brewDesc}</p>                
             </div>
         </div>
     </div>`;
-    $('.modal-info').html(modal);
+    $('.brewDetails').html(modal);
 
     if (brewURL !== "NO-URL") {
-        $('.modal-info').append(`
+        $('.brewDetails').append(`
             <a href="${brewURL}" target="_blank" class="brewURLButton">
                <div class="ui huge primary button home-button" id="brewery-site-button">Visit website</div>
             </a>
-
         `);
     }
 
-    $('.modal-info').append(`
+    $('.brewDetails').append(`
         <br>
         <p id="lyft-desc">Drink responsibly. Get a ride! <i class="fas fa-car-side"></i></p>
         <!-- Lyft button -->
         <div id="lyft-web-button-parent"></div>
-
         `);
+
+    document.location.href = 'brewery.html';
 
 });
 
 // ============================================ END MODAL ==============================================//
-
-
-//==============================================Lyft API ==============================================//
-
-/**
- * Immediately-invoked function expression that configures and instantiates a lyftWebButton.
- * @param {Object} options object for configuring the button (see README.md)
- */
-var OPTIONS = {
-    scriptSrc: 'assets/javascript/lyftWebButton.min.js',
-    namespace: '',
-    clientId: 'XDnhhOqwyLGF',
-    clientToken: 'JJUujaMGiPYZELSa054PRbvsLKZWtgGAS7KV5cQtiBf',
-    location: {
-        pickup: {},
-        destination: {
-            latitude: '47.612720',
-            longitude: '-122.320270',
-        },
-    },
-    parentElement: document.getElementById('lyft-web-button-parent'),
-    queryParams: {
-        credits: ''
-    },
-    theme: 'mulberry-dark large',
-};
-(function (t) {
-    var n = this.window,
-        e = this.document;
-    n.lyftInstanceIndex = n.lyftInstanceIndex || 0;
-    var a = t.parentElement,
-        c = e.createElement("script");
-    c.async = !0, c.onload = function () {
-        n.lyftInstanceIndex++;
-        var e = t.namespace ? "lyftWebButton" + t.namespace + n.lyftInstanceIndex : "lyftWebButton" + n.lyftInstanceIndex;
-        n[e] = n.lyftWebButton, t.objectName = e, n[e].initialize(t)
-    }, c.src = t.scriptSrc, a.insertBefore(c, a.childNodes[0])
-}).call(this, OPTIONS);
-//==============================================END Lyft API ==============================================//
