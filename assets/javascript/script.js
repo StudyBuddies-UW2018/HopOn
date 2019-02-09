@@ -238,3 +238,112 @@ $('body').on('click', 'div.ui.card', function (event) {
 });
 
 // ============================================ END MODAL ==============================================//
+
+// ============================================ FIREBASE ==============================================//
+
+   // Initialize Firebase
+   var config = {
+    apiKey: "AIzaSyAX5YgDAquBM8CxrEckXe0MN3XWhWKjeHU",
+    authDomain: "hopon-f4180.firebaseapp.com",
+    databaseURL: "https://hopon-f4180.firebaseio.com",
+    projectId: "hopon-f4180",
+    storageBucket: "hopon-f4180.appspot.com",
+    messagingSenderId: "176317052818"
+};
+    
+firebase.initializeApp(config);
+
+//define the database variable and empty strings for new user information
+var database = firebase.database();
+        
+var userName = "";
+var password = "";
+
+
+//event handler for login button
+$(".login").on("click", function(event){
+    event.preventDefault();
+
+    userName = $("#userName").val().trim();
+    console.log(userName)
+
+    password = $("#password").val().trim();
+    console.log(password)
+
+    database.ref("/users").once("value", function(snapshot){
+        var snapShot = snapshot.val()
+
+        for (var key in snapShot) {
+            console.log(snapShot[key].username)
+            // snapShot[key].password === password
+            //create if/ else/ else if statements to match usernames to passwords
+        };
+    });
+});
+
+//event listner for Username and Password information     
+$(".signUp").on("click", function(event){
+    event.preventDefault();
+
+    //Clears extra space after entering user information
+    userName = $("#userName").val().trim();
+    console.log(userName)
+
+    password = $("#password").val().trim();
+    console.log(password)
+
+    //Pushes into a user folder in firebase
+    database.ref("/users").push({
+        username: userName, 
+        password: password
+     });
+    
+    //Clears form after adding information to form
+    $("#userName").val("");
+    $("#password").val("");
+});
+        
+
+database.ref().on("value", function(snapshot) {
+
+    // Print the initial data to the console
+    console.log(snapshot.val());
+
+    // Log the value of the various properties
+    console.log(snapshot.val().userName);
+    console.log(snapshot.val().password);
+
+    // If any errors are experienced, log them to console.
+    }, function(errorObject) {
+
+        console.log("The read failed: " + errorObject.code);
+ });
+
+//function to append new information to user
+database.ref().on("child_added", function(childSnapShot) {
+    console.log(childSnapShot.val());
+    
+
+    var newUser = childSnapShot.val().username;
+    var newPassword = childSnapShot.val().password;
+});
+
+//Remain commented out, testing putting objects into a string and onceloop
+// database.ref('/users').on('value', function(snapshot) {
+//     console.log('snapshot --->', snapshot.val());
+
+//     var snapShot = snapshot.val()
+
+//     for (var key in snapShot) {
+//         console.log(snapShot[key].username)
+//         // snapShot[key].password === password
+//     }
+// });
+    
+//Creates a unique user folder, commented out once added to firebase database otherwise it would make a new /users + nicole test every time
+// database.ref('/users').push({
+//     username : 'nicole',
+//     password : 'test'
+// });
+
+// ============================================ END FIREBASE ==============================================//
