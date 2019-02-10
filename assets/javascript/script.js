@@ -117,7 +117,7 @@ var brewFunction = function () {
             
             //Set brewery logos in variables to use on browse and modals
             if (typeof breweryImage === 'undefined') {
-                breweryImage = "assets/images/hop.png";
+                breweryImage = "assets/images/hop-icon.png";
                 var breweryLogo = "assets/images/hop.png";
 
             } else {
