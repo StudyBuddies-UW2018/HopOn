@@ -51,8 +51,16 @@ h2 {
     color: #1c374e;
 }
 
+h3 {
+    color: #888888;
+}
+
 p {
     color: #888888;
+}
+
+.brewery-distance {
+    margin-top: 1rem!important;
 }
 
 .home-img {
