@@ -9,6 +9,13 @@ console.log(brewLong);
 var brewLogo = localStorage.getItem("brewLogo");
 console.log(brewLogo);
 var brewDesc = localStorage.getItem("brewDesc");
+var brewType = localStorage.getItem("brewType");
+var brewLocal = localStorage.getItem("brewLocal");
+console.log(brewLocal);
+var breweryPhone = localStorage.getItem("breweryPhone");
+
+
+
 var brewURL = localStorage.getItem("brewURL");
 
 
@@ -16,6 +23,9 @@ var brewURL = localStorage.getItem("brewURL");
 $('.brewName').text(brewName);
 $('.brewLogo').attr("src", brewLogo);
 $('.brewDesc').text(brewDesc);
+$('.brewType').append(brewType);
+$('.brewLocal').append(brewLocal);
+$('.breweryPhone').append(breweryPhone);
 $('.brewURLButton').attr("href", brewURL);
 
   

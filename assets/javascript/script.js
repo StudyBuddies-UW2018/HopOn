@@ -129,7 +129,34 @@ var brewFunction = function () {
             var breweryLong = results.data[i].longitude;
 
             var breweryDistance = results.data[i].distance;
-            console.log(breweryDistance);
+            // console.log(breweryDistance);
+
+
+
+
+            var breweryType = results.data[i].locationTypeDisplay;
+            // console.log(breweryType);
+
+            var breweryLocal = results.data[i].brewery.isMassOwned;
+            if (breweryLocal === "Y") {
+                breweryLocal = "No";
+            } else {
+                breweryLocal = "Yes";
+            }
+            // console.log(breweryLocal);
+
+            //There's only 3 organic so for now not worth adding this data to the page
+            // var breweryOrganic = results.data[i].brewery.isOrganic;
+            // console.log(breweryOrganic);
+
+
+            var breweryPhone = results.data[i].phone;
+            if (!breweryPhone) {
+                breweryPhone = "None listed";
+            }
+            // console.log(breweryPhone);
+
+
 
             // var breweryHours = results.data[i].hoursOfOperation;
             // if (!breweryHours) {
@@ -138,7 +165,7 @@ var brewFunction = function () {
             // console.log(breweryHours);
 
 
-            var card = `<div class="ui card" data-name="${breweryName}" data-logo="${breweryLogo}" data-desc="${breweryDescription}" data-url="${breweryURL}" data-lat="${breweryLat}" data-long="${breweryLong}">
+            var card = `<div class="ui card" data-name="${breweryName}" data-logo="${breweryLogo}" data-desc="${breweryDescription}" data-url="${breweryURL}" data-lat="${breweryLat}" data-long="${breweryLong}" data-type="${breweryType}" data-local="${breweryLocal}" data-phone="${breweryPhone}">
             <div class="extra content">
                 <span class="left floated like">
                     <i class="like icon"></i>
@@ -202,23 +229,8 @@ var brewFunction = function () {
 
 // ==========================END AJAX CALL AND CREATING BREWERY CARDS ================================//
 
-// =================================== ON CLICK FOR MAP ===============================================//
 
-//                  DELETE ALL THIS
-
-// $('body').on('click', beachMarker, function (event) {
-//     event.preventDefault();
-//     console.log('YOU CLICKED A BEACH MARKER');
-//     infoWindow.setPosition(this.position);
-//     // infoWindow.setContent(this.name);
-//     infoWindow.setContent("HEY");
-//     infoWindow.open(map);
-// });
-
-// =================================== END ON CLICK FOR MAP ============================================//
-
-
-// ============================================ MODAL ==================================================//
+// ================================== BREWERY DETAIL PAGE ===========================================//
 
 $('body').on('click', 'div.ui.card', function (event) {
     event.preventDefault();
@@ -235,6 +247,10 @@ $('body').on('click', 'div.ui.card', function (event) {
     var brewURL = this.getAttribute("data-url");
     var brewLat = this.getAttribute("data-lat");
     var brewLong = this.getAttribute("data-long");
+    var brewType = this.getAttribute("data-type");
+    var brewLocal = this.getAttribute("data-local");
+    var breweryPhone = this.getAttribute("data-phone");
+
 
     if (typeof(Storage) !== "undefined") {
         console.log("Code for localStorage/sessionStorage.");
@@ -244,6 +260,11 @@ $('body').on('click', 'div.ui.card', function (event) {
         localStorage.setItem("brewLogo", brewLogo);
         localStorage.setItem("brewDesc", brewDesc);
         localStorage.setItem("brewURL", brewURL);
+        localStorage.setItem("brewType", brewType);
+        localStorage.setItem("brewLocal", brewLocal);
+        localStorage.setItem("breweryPhone", breweryPhone);
+
+
 
     } else {
         console.log("Sorry! No Web Storage support..");
