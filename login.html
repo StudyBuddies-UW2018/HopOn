@@ -52,11 +52,107 @@
         </div>
 
         <!--Working Log in button-->
-        <div class="ui login button">Login</div>
+        <div class="ui login button" id=login>Login</div>
     </div>
 
 </div>
-<!-- footer -->
+
+<script>
+
+//=========================FIREBASE LOGIN PAGE====================================//
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyAX5YgDAquBM8CxrEckXe0MN3XWhWKjeHU",
+    authDomain: "hopon-f4180.firebaseapp.com",
+    databaseURL: "https://hopon-f4180.firebaseio.com",
+    projectId: "hopon-f4180",
+    storageBucket: "hopon-f4180.appspot.com",
+    messagingSenderId: "176317052818"
+};
+    
+firebase.initializeApp(config);
+
+//define the database variable and empty strings for new user information
+var database = firebase.database();
+        
+var userName = "";
+var password = "";
+
+
+//event handler for submit button
+$(".login").on("click", function(event){
+    event.preventDefault();
+
+    userName = $("#userName").val().trim();
+    console.log(userName)
+
+    password = $("#password").val().trim();
+    console.log(password)
+
+    database.ref("/users").once("value", function(snapshot){
+        var snapShot = snapshot.val()
+
+        for (var key in snapShot) {
+            console.log(snapShot[key].username)
+            // snapShot[key].password === password
+            //create if/ else/ else if statements to match usernames to passwords
+        };
+    });
+});
+
+//event listner for Username and Password information     
+$(".login").on("click", function(event){
+    event.preventDefault();
+
+    //Clears extra space after entering user information
+
+    userName = $("#userName").val().trim();
+    console.log(userName)
+
+    password = $("#password").val().trim();
+    console.log(password)
+
+    //Pushes into a user folder in firebase
+    database.ref("/users").push({
+        username: userName, 
+        password: password
+     });
+    
+    //Clears form after adding information to form
+    $("#userName").val("");
+    $("#password").val("");
+});
+        
+
+database.ref().on("value", function(snapshot) {
+
+    // Print the initial data to the console
+    console.log(snapshot.val());
+
+    // Log the value of the various properties
+    console.log(snapshot.val().userName);
+    console.log(snapshot.val().password);
+
+    // If any errors are experienced, log them to console.
+    }, function(errorObject) {
+
+        console.log("The read failed: " + errorObject.code);
+ });
+
+//function to append new information to user
+database.ref().on("child_added", function(childSnapShot) {
+    console.log(childSnapShot.val());
+    
+
+    var newUser = childSnapShot.val().username;
+    var newPassword = childSnapShot.val().password;
+});
+</script>
+
+<!--================ END FIREBASE LOGIN PAGE==============================
+
+footer-->
 <div class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
         <div class="seven wide column">
@@ -73,7 +169,7 @@
 <!-- end footer -->
 
 <!-- Our JS script -->
-<script src="assets/javascript/script.js"></script>
+<!-- <script src="assets/javascript/script.js"></script> -->
 
 </body>
 </html>
