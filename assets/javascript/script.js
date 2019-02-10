@@ -128,10 +128,13 @@ var brewFunction = function () {
             var breweryLat = results.data[i].latitude;
             var breweryLong = results.data[i].longitude;
 
-            var breweryHours = results.data[i].hoursOfOperation;
-            if (!breweryHours) {
-                breweryHours = " ";
-            }
+            var breweryDistance = results.data[i].distance;
+            console.log(breweryDistance);
+
+            // var breweryHours = results.data[i].hoursOfOperation;
+            // if (!breweryHours) {
+            //     breweryHours = " ";
+            // }
             // console.log(breweryHours);
 
 
@@ -150,7 +153,7 @@ var brewFunction = function () {
                 <a href="brewery.html">
                     <h3>${breweryName}</h3>
                     <img src="${breweryImage}" width='64' height='64' />
-                    <p>${breweryName}</p>
+                    <p class="brewery-distance">${breweryDistance} miles away</p>
                 </a>
             </div>
         </div>`;

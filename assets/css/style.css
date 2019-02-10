@@ -59,6 +59,10 @@ p {
     color: #888888;
 }
 
+.brewery-distance {
+    margin-top: 1rem!important;
+}
+
 .home-img {
     margin-top: 40px;
 }
