@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>About</title>
+    <title>Hop On-About</title>
     <!-- Semantic UI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <!-- css -->
@@ -16,53 +16,124 @@
 </head>
 
 <body>
-    <div class="content"> 
+    <div class="content">
         <!-- NavBar -->
         <div class="ui secondary menu" id="menu">
-            <a class="active item" href="index.html">
+            <a class="item" href="index.html">
                 <p class="navItem">Home</p>
-            </a>
-            <a class="item" href="login.html">
-                <p class="navItem">Sign In</p>
             </a>
             <a class="item" href="about.html">
                 <p class="navItem">About</p>
             </a>
             <a class="item" href="browse.html">
-                <p class="navItem">Browse</p>
+                <p class="active navItem">Browse</p>
             </a>
             <a class="item" href="contactUs.html">
                 <p class="navItem">Contact Us</p>
             </a>
+            <a class="item" href="login2.html">
+                <p class="navItem">Sign In</p>
+            </a>
         </div>
         <!-- NavBar End -->
 
-        <!--TODO: Bry if you want to add more in the about us, it clearly needs it. Or add anything else to this. Or you can change the semantic div box if you want. Basically just hooked up the skeleton-->
-        <!-- Main Page Content -->
-        <div class="ui container">
-            <div class="ui floating message">
-                <p>Your one stop shop where you can easily find all kinds of local breweries taylored to you! Just visit our browse page, hit the allow notification in order to accesss your location, and you'll be quickly shown a list of interesting breweries in your area simple as that. A great way to check out what's around you and to learn a little bit about the brewery itself. Sold on checking a place out? Just click our handy Lyft button to easily and safely get you on your way. So you never have to wish you were beer again!</p>
-            </div>
-        </div>
+        <!-- About Page Content -->
+        <div class="ui middle aligned center aligned grid home-page">
+            <div class="column">
+                <div class="ui text container">
+                    <h1 class="ui home-title">
+                        Hop On!
+                    </h1>
 
-    </div>
-    <br>
-    <br>
-    <!-- footer -->
-    <div class="ui inverted vertical footer segment">
-        <div class="ui center aligned container">
-            <div class="seven wide column">
-                <i class="beer icon ui centered"></i>
-            </div>
-            <div class="ui horizontal inverted small divided link list">
-                <a class="item" href="index.html">Site Map</a>
-                <a class="item" href="contactUs.html">Contact Us</a>
-                <a class="item" href="#">Terms and Conditions</a>
-                <a class="item" href="#">Privacy Policy</a>
-            </div>
-        </div>
-    </div>
-    <!-- end footer -->
+                    <h2>Getting you from A to Beer!</h2>
+                </div>
+
+                <img src="assets/images/hop.png" alt="Hop On Logo" title="Hop On Logo" width="64" height="64">
+
+                <div class="ui container">
+                    <div class="ui floating message">
+                        <p>Your one-stop shop where you can easily find all kinds of local breweries near you! Visit
+                            our browse page, allow it to know your location, and you'll be shown a list of interesting
+                            breweries in your area. Simple as that! A great way to check out what is around you and to
+                            learn a little bit about the brewery itself.</p>
+
+                        <p>Sold on checking a place out? Just click our handy Lyft button to easily, and safely, get
+                            you on your way. So you never have to hear wish you were beer again!</p>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="ui container">
+                    <div class="ui floating message">
+                        <h2 class="ui header">Meet the team!</h2>
+
+                        <div class="ui relaxed grid">
+                            <div class="four column row">
+                                <div class="column">
+                                    <div class="ui fluid image">
+                                        <a href="https://www.linkedin.com/in/kelseybeffel/" class="ui small image"
+                                            target="_blank">
+                                            <img class="ui small image" src="assets/images/kelsey.jpeg" alt="Kelsey"
+                                                title="Kelsey">
+                                            <div class="ui bottom attached label">Kelsey</div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="column">
+                                    <div class="ui fluid image">
+                                        <a href="https://www.linkedin.com/in/bryanrkelley14/" class="ui small image"
+                                            target="_blank">
+                                            <img class="ui small image" src="assets/images/bryan.jpeg" alt="Bryan"
+                                                title="Bryan">
+                                            <div class="ui bottom attached label">Bryan</div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="column">
+                                    <div class="ui fluid image">
+                                        <a href="https://www.linkedin.com/in/ochwat/" class="ui small image" target="_blank">
+                                            <img class="ui small image" src="assets/images/tad.jpeg" alt="Tad" title="Tad">
+                                            <div class="ui bottom attached label">Tad</div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="column">
+                                    <div class="ui fluid image">
+                                        <a href="https://www.linkedin.com/in/nicole-white-22445a174/" class="ui small image" target="_blank">
+                                            <img class="ui small image" src="assets/images/nicole.jpeg" alt="Nicole"
+                                                title="Nicole">
+                                            <div class="ui bottom attached label">Nicole</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+
+                <!-- footer -->
+                <div class="ui inverted vertical footer segment">
+                    <div class="ui center aligned container">
+                        <div class="seven wide column">
+                            <i class="beer icon ui centered"></i>
+                        </div>
+                        <div class="ui horizontal inverted small divided link list">
+                            <a class="item" href="index.html">Site Map</a>
+                            <a class="item" href="contactUs.html">Contact Us</a>
+                            <a class="item" href="#">Terms and Conditions</a>
+                            <a class="item" href="#">Privacy Policy</a>
+                            <p>Copyright 2019 - All rights reserved &copy;</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end footer -->
 </body>
 
 </html>

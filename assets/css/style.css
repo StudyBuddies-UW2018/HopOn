@@ -1,6 +1,7 @@
-html, body {
+html,
+body {
     height: 100%;
-  }
+}
 
 
 body {
@@ -66,7 +67,8 @@ p {
 
 #browse-button {
     background-color: #cf2b1e;
-    margin-top: 50px!important;}
+    margin-top: 50px !important;
+}
 
 #brewery-site-button {
     background-color: #cf2b1e;
@@ -118,6 +120,9 @@ p {
     color: #1c374e;
 }
 
+.ui.bottom.attached.label {
+    padding: .25rem;
+}
 
 /* ==========================  FOOTER  ======================== */
 
@@ -129,10 +134,15 @@ p {
     width: 100%;
 } */
 
+.ui.vertical.segment {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
 
 .ui.inverted.segment {
     background: #1c374e;
 }
+
 /* ========================== MAP STYLE ======================== */
 
 /* Always set the map height explicitly to define the size of the div
@@ -164,21 +174,30 @@ body {
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  
-  /* Modal Content */
-  .modal-content {
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -186,30 +205,29 @@ body {
     width: 75%;
     box-shadow: 0px 1px 15px 5px #888888 !important;
     border-radius: 1.5rem !important;
-  }
-  
-  /* The Close Button */
-  .close {
+}
+
+/* The Close Button */
+.close {
     color: #aaaaaa;
     /* float: right; */
     font-size: 50px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
-  #lyft-desc {
-      text-align: center;
-  }
+#lyft-desc {
+    text-align: center;
+}
 
-  /* ==================================================== */
+/* ==================================================== */
 
-  .brewURLButton {
+.brewURLButton {
     margin-right: 20px;
-
-  }
+}
