@@ -105,9 +105,9 @@ p {
     color: rgba(202, 202, 202, 0.95);
 }
 
-.home-page {
+/* .home-page {
     height: 100%;
-}
+} */
 
 .get-started-button {
     color: white;
@@ -133,6 +133,10 @@ p {
 }
 
 /* ==========================  FOOTER  ======================== */
+
+.footer {
+    margin-top: 40px!important;
+}
 
 /* TODO: find a better way to select footer. Id's should only be used once */
 /* #footer {
