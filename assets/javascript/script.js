@@ -165,7 +165,7 @@ var brewFunction = function () {
             // console.log(breweryHours);
 
 
-            var card = `<div class="ui card" data-name="${breweryName}" data-logo="${breweryLogo}" data-desc="${breweryDescription}" data-url="${breweryURL}" data-lat="${breweryLat}" data-long="${breweryLong}" data-type="${breweryType}" data-local="${breweryLocal}" data-phone="${breweryPhone}">
+            var card = `<div class="ui card">
             <div class="extra content">
                 <span class="left floated like">
                     <i class="like icon"></i>
@@ -176,7 +176,7 @@ var brewFunction = function () {
                     Favorite
                 </span>
             </div>
-            <div class="content center aligned">
+            <div class="content center aligned" data-name="${breweryName}" data-logo="${breweryLogo}" data-desc="${breweryDescription}" data-url="${breweryURL}" data-lat="${breweryLat}" data-long="${breweryLong}" data-type="${breweryType}" data-local="${breweryLocal}" data-phone="${breweryPhone}">
                 <a href="brewery.html">
                     <h3>${breweryName}</h3>
                     <img src="${breweryImage}" width='64' height='64' />
@@ -232,7 +232,7 @@ var brewFunction = function () {
 
 // ================================== BREWERY DETAIL PAGE ===========================================//
 
-$('body').on('click', 'div.ui.card', function (event) {
+$('body').on('click', 'div.content.center.aligned', function (event) {
     event.preventDefault();
 
 
