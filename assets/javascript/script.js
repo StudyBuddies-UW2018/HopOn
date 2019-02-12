@@ -189,7 +189,7 @@ var brewFunction = function () {
 
 
             var breweryLocations = function () {
-                var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+                var image = 'assets/images/stein.png';
                 var beachMarker = new google.maps.Marker({
                     position: {
                         lat: results.data[i].latitude,
