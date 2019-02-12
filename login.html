@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
+    <title>Hop On-Log In</title>
     <!-- Semantic UI -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <!-- CSS -->
@@ -12,164 +13,170 @@
     <!-- ajax/jQuery cdn -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Firebase Reference -->
-    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>   
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
 </head>
 
 <body>
     <div class="content">
-    <!-- NavBar -->
-    <div class="ui secondary menu" id="menu">
-        <a class="active item" href="index.html">
-            <p class="navItem">Home</p>
-        </a>
-        <a class="item" href="browse.html">
-            <p class="navItem">Browse</p>
-        </a>
-        <a class="item" href="about.html">
-            <p class="navItem">About</p>
-        </a>
-        <a class="item" href="contactUs.html">
-            <p class="navItem">Contact Us</p>
-        </a>
-        <a class="item" href="login2.html">
-            <p class="navItem">Sign In</p>
-        </a>
+
+        <!-- NavBar -->
+        <div class="ui stackable secondary menu" id="menu">
+            <a class="active item" href="index.html">
+                <p class="navItem">Home</p>
+            </a>
+            <a class="item" href="browse.html">
+                <p class="navItem">Browse</p>
+            </a>
+            <a class="item" href="about.html">
+                <p class="navItem">About</p>
+            </a>
+            <a class="item" href="contactUs.html">
+                <p class="navItem">Contact Us</p>
+            </a>
+            <a class="item" href="login2.html">
+                <p class="navItem">Sign In</p>
+            </a>
         </div>
         <!-- NavBar End -->
-    
-    <!--Form to enter enter Username and Password-->
-    <div class="ui mini form">
-        <div class="two fields">
-            <div class="field">
-                <label>User Name:</label>
-                <input placeholder="User Name" id="userName" type="text">
+
+        <!--Form to enter enter Username and Password-->
+        <div class="ui mini form">
+            <div class="two fields">
+                <div class="field">
+                    <label>User Name:</label>
+                    <input placeholder="User Name" id="userName" type="text">
+                </div>
+
+                <div class="field">
+                    <label>Password:</label>
+                    <input placeholder="Password" id="password" type="text">
+                </div>
             </div>
 
-            <div class="field">
-                <label>Password:</label>
-                <input placeholder="Password" id="password" type="text">
-            </div>
+            <!--Working Log in button-->
+            <div class="ui login button" id=login>Login</div>
         </div>
 
-        <!--Working Log in button-->
-        <div class="ui login button" id=login>Login</div>
     </div>
 
-</div>
+    <script>
+        //=========================FIREBASE LOGIN PAGE====================================//
 
-<script>
-
-//=========================FIREBASE LOGIN PAGE====================================//
-
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyAX5YgDAquBM8CxrEckXe0MN3XWhWKjeHU",
-    authDomain: "hopon-f4180.firebaseapp.com",
-    databaseURL: "https://hopon-f4180.firebaseio.com",
-    projectId: "hopon-f4180",
-    storageBucket: "hopon-f4180.appspot.com",
-    messagingSenderId: "176317052818"
-};
-    
-firebase.initializeApp(config);
-
-//define the database variable and empty strings for new user information
-var database = firebase.database();
-        
-var userName = "";
-var password = "";
-
-
-//event handler for submit button
-$(".login").on("click", function(event){
-    event.preventDefault();
-
-    userName = $("#userName").val().trim();
-    console.log(userName)
-
-    password = $("#password").val().trim();
-    console.log(password)
-
-    database.ref("/users").once("value", function(snapshot){
-        var snapShot = snapshot.val()
-
-        for (var key in snapShot) {
-            console.log(snapShot[key].username)
-            // snapShot[key].password === password
-            //create if/ else/ else if statements to match usernames to passwords
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAX5YgDAquBM8CxrEckXe0MN3XWhWKjeHU",
+            authDomain: "hopon-f4180.firebaseapp.com",
+            databaseURL: "https://hopon-f4180.firebaseio.com",
+            projectId: "hopon-f4180",
+            storageBucket: "hopon-f4180.appspot.com",
+            messagingSenderId: "176317052818"
         };
-    });
-});
 
-//event listner for Username and Password information     
-$(".login").on("click", function(event){
-    event.preventDefault();
+        firebase.initializeApp(config);
 
-    //Clears extra space after entering user information
+        //define the database variable and empty strings for new user information
+        var database = firebase.database();
 
-    userName = $("#userName").val().trim();
-    console.log(userName)
+        var userName = "";
+        var password = "";
 
-    password = $("#password").val().trim();
-    console.log(password)
 
-    //Pushes into a user folder in firebase
-    database.ref("/users").push({
-        username: userName, 
-        password: password
-     });
-    
-    //Clears form after adding information to form
-    $("#userName").val("");
-    $("#password").val("");
-});
-        
+        //event handler for submit button
+        $(".login").on("click", function (event) {
+            event.preventDefault();
 
-database.ref().on("value", function(snapshot) {
+            userName = $("#userName").val().trim();
+            console.log(userName)
 
-    // Print the initial data to the console
-    console.log(snapshot.val());
+            password = $("#password").val().trim();
+            console.log(password)
 
-    // Log the value of the various properties
-    console.log(snapshot.val().userName);
-    console.log(snapshot.val().password);
+            database.ref("/users").once("value", function (snapshot) {
+                var snapShot = snapshot.val()
 
-    // If any errors are experienced, log them to console.
-    }, function(errorObject) {
+                for (var key in snapShot) {
+                    console.log(snapShot[key].username)
+                    // snapShot[key].password === password
+                    //create if/ else/ else if statements to match usernames to passwords
+                };
+            });
+        });
 
-        console.log("The read failed: " + errorObject.code);
- });
+        //event listner for Username and Password information     
+        $(".login").on("click", function (event) {
+            event.preventDefault();
 
-//function to append new information to user
-database.ref().on("child_added", function(childSnapShot) {
-    console.log(childSnapShot.val());
-    
+            //Clears extra space after entering user information
 
-    var newUser = childSnapShot.val().username;
-    var newPassword = childSnapShot.val().password;
-});
-</script>
+            userName = $("#userName").val().trim();
+            console.log(userName)
 
-<!--================ END FIREBASE LOGIN PAGE==============================
+            password = $("#password").val().trim();
+            console.log(password)
 
-footer-->
-<div class="ui inverted vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="seven wide column">
-            <i class="beer icon ui centered"></i>
-        </div>
-        <div class="ui horizontal inverted small divided link list">
-            <a class="item" href="index.html">Site Map</a>
-            <a class="item" href="contactUs.html">Contact Us</a>
-            <a class="item" href="#">Terms and Conditions</a>
-            <a class="item" href="#">Privacy Policy</a>
+            //Pushes into a user folder in firebase
+            database.ref("/users").push({
+                username: userName,
+                password: password
+            });
+
+            //Clears form after adding information to form
+            $("#userName").val("");
+            $("#password").val("");
+        });
+
+
+        database.ref().on("value", function (snapshot) {
+
+            // Print the initial data to the console
+            console.log(snapshot.val());
+
+            // Log the value of the various properties
+            console.log(snapshot.val().userName);
+            console.log(snapshot.val().password);
+
+            // If any errors are experienced, log them to console.
+        }, function (errorObject) {
+
+            console.log("The read failed: " + errorObject.code);
+        });
+
+        //function to append new information to user
+        database.ref().on("child_added", function (childSnapShot) {
+            console.log(childSnapShot.val());
+
+
+            var newUser = childSnapShot.val().username;
+            var newPassword = childSnapShot.val().password;
+        });
+    </script>
+
+    <!--================ END FIREBASE LOGIN PAGE==============================
+
+    <!-- footer -->
+    <div class="ui inverted vertical footer segment">
+        <div class="ui center aligned container">
+            <div class="seven wide column">
+                <i class="beer icon ui centered"></i>
+            </div>
+            <div class="ui horizontal inverted small divided link list">
+                <a class="item" href="index.html">Site Map</a>
+                <a class="item" href="contactUs.html">Contact Us</a>
+                <a class="item" href="#">Terms and Conditions</a>
+                <a class="item" href="#">Privacy Policy</a>
+                <p>Copyright 2019 - All rights reserved &copy;</p>
+            </div>
         </div>
     </div>
-</div>
-<!-- end footer -->
+    <!-- end footer -->
 
-<!-- Our JS script -->
-<!-- <script src="assets/javascript/script.js"></script> -->
+    <!-- ajax/jQuery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Semantic UI script -->
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <!-- Our JS script -->
+    <script src="assets/javascript/script.js"></script>
 
 </body>
+
 </html>

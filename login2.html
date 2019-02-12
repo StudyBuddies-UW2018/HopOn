@@ -2,102 +2,109 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
-    <!-- Semantic UI -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <!-- CSS -->
-    <link href="assets/css/style.css" type="text/css" rel="stylesheet">
-    <!-- ajax/jQuery cdn -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Firebase Reference -->
-    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>   
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hop On-Register</title>
+  <!-- Semantic UI -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <!-- CSS -->
+  <link href="assets/css/style.css" type="text/css" rel="stylesheet">
+  <!-- ajax/jQuery cdn -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
 </head>
 
 <body>
-    <div class="content">
+  <div class="content">
     <!-- NavBar -->
     <div class="ui stackable secondary menu" id="menu">
-        <a class="active item" href="index.html">
-            <p class="navItem">Home</p>
-        </a>
-        <a class="item" href="browse.html">
-            <p class="navItem">Browse</p>
-        </a>
-        <a class="item" href="about.html">
-          <p class="navItem">About</p>
-        </a>
-        <a class="item" href="contactUs.html">
-            <p class="navItem">Contact Us</p>
-        </a>
-        <a class="item" href="login2.html">
-            <p class="navItem">Sign In</p>
-        </a>
-        </div>
-        <!-- NavBar End -->
-    
-        <!--Register form-->
-        <div class="ui attached message">
-            <div class="header">
-              Welcome to HopOn!
-            </div>
-            <p>Fill out the form below to sign up for a new account</p>
-          </div>
-          <form class="ui form attached fluid segment">
-            <div class="two fields">
-              <div class="field">
-                <label>First Name:</label>
-                <input placeholder="First Name" id=firstName type="text">
-              </div>
-              <div class="field">
-                <label>Last Name:</label>
-                <input placeholder="Last Name" id=lastName type="text">
-              </div>
-            </div>
-            <div class="field">
-              <label>Username:</label>
-              <input placeholder="Username" id=userName type="text">
-            </div>
-            <div class="field">
-              <label>Password:</label>
-              <input placeholder="Password" id=password input type="password">
-            </div>
-            <div class="inline field">
-              <div class="ui checkbox">
-                <input type="checkbox" id="terms">
-                <label for="terms">I agree to the terms and conditions</label>
-              </div>
-            </div>
-            <div class="ui blue submit button" id=submit>Submit</div>
-          </form>
-          <div class="ui bottom attached warning message">
-            <i class="icon help"></i>
-            Already signed up with us? <a href="login.html">Login here</a> instead.
-          </div>
-          <br>
-</div>
-
-<!-- footer -->
-<div class="ui inverted vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="seven wide column">
-            <i class="beer icon ui centered"></i>
-        </div>
-        <div class="ui horizontal inverted small divided link list">
-            <a class="item" href="index.html">Site Map</a>
-            <a class="item" href="contactUs.html">Contact Us</a>
-            <a class="item" href="#">Terms and Conditions</a>
-            <a class="item" href="#">Privacy Policy</a>
-        </div>
+      <a class="active item" href="index.html">
+        <p class="navItem">Home</p>
+      </a>
+      <a class="item" href="browse.html">
+        <p class="navItem">Browse</p>
+      </a>
+      <a class="item" href="about.html">
+        <p class="navItem">About</p>
+      </a>
+      <a class="item" href="contactUs.html">
+        <p class="navItem">Contact Us</p>
+      </a>
+      <a class="item" href="login2.html">
+        <p class="navItem">Sign In</p>
+      </a>
     </div>
-</div>
-<!-- end footer -->
+    <!-- NavBar End -->
 
-<!-- Our JS script -->
-<script src="assets/javascript/script.js"></script>
+    <!--Register form-->
+    <div class="ui attached message">
+      <div class="header">
+        Welcome to HopOn!
+      </div>
+      <p>Fill out the form below to sign up for a new account</p>
+    </div>
+    <form class="ui form attached fluid segment">
+      <div class="two fields">
+        <div class="field">
+          <label>First Name:</label>
+          <input placeholder="First Name" id=firstName type="text">
+        </div>
+        <div class="field">
+          <label>Last Name:</label>
+          <input placeholder="Last Name" id=lastName type="text">
+        </div>
+      </div>
+      <div class="field">
+        <label>Username:</label>
+        <input placeholder="Username" id=userName type="text">
+      </div>
+      <div class="field">
+        <label>Password:</label>
+        <input placeholder="Password" id=password input type="password">
+      </div>
+      <div class="inline field">
+        <div class="ui checkbox">
+          <input type="checkbox" id="terms">
+          <label for="terms">I agree to the terms and conditions</label>
+        </div>
+      </div>
+      <div class="ui blue submit button" id=submit>Submit</div>
+    </form>
+    <div class="ui bottom attached warning message">
+      <i class="icon help"></i>
+      Already signed up with us? <a href="login.html">Login here</a> instead.
+    </div>
+    <br>
+  </div>
+
+  <!-- footer -->
+  <div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+      <div class="seven wide column">
+        <i class="beer icon ui centered"></i>
+      </div>
+      <div class="ui horizontal inverted small divided link list">
+        <a class="item" href="index.html">Site Map</a>
+        <a class="item" href="contactUs.html">Contact Us</a>
+        <a class="item" href="#">Terms and Conditions</a>
+        <a class="item" href="#">Privacy Policy</a>
+        <p>Copyright 2019 - All rights reserved &copy;</p>
+      </div>
+    </div>
+  </div>
+  <!-- end footer -->
+
+    <!-- ajax/jQuery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Semantic UI script -->
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <!-- Our JS script -->
+    <script src="assets/javascript/script.js"></script>
 
 </body>
+
 </html>
