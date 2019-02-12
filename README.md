@@ -6,7 +6,7 @@ Main Page of Hop On:
 https://studybuddies-uw2018.github.io/HopOn/index.html
 
 
-Creators
+#Creators
 
 Bryan Kelley: https://github.com/bryanrkelley
 
