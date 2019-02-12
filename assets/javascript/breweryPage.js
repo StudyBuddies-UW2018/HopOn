@@ -1,5 +1,4 @@
 // ================================= Code for Brewery Detail Page =========================================//
-
 var brewName = localStorage.getItem("brewName");
 console.log(brewName);
 var brewLat = localStorage.getItem("brewLat");
@@ -14,11 +13,7 @@ var brewLocal = localStorage.getItem("brewLocal");
 console.log(brewLocal);
 var breweryPhone = localStorage.getItem("breweryPhone");
 
-
-
 var brewURL = localStorage.getItem("brewURL");
-
-
 
 $('.brewName').text(brewName);
 $('.brewLogo').attr("src", brewLogo);
@@ -27,12 +22,6 @@ $('.brewType').append(brewType);
 $('.brewLocal').append(brewLocal);
 $('.breweryPhone').append(breweryPhone);
 $('.brewURLButton').attr("href", brewURL);
-
-  
-  
-
-
-
 // ================================= END Code for Brewery Detail Page =====================================//
 
 //==============================================Lyft API ==============================================//

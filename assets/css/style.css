@@ -1,8 +1,19 @@
 html,
+/* color palette
+
+    gold: #e59a39;
+    navy: #1c374e;
+    light-gray: #f9f9f9;
+    red: #cf2b1e;
+    gray: #888888;
+    teal: #1ea88e;
+    black: #0c1212;
+
+*/
+
 body {
     height: 100%;
 }
-
 
 body {
     margin: 0;
@@ -15,19 +26,7 @@ body {
 
 }
 
-/* the centering on the page */
-/* 
-    gold: #e59a39;
-    navy: #1c374e;
-    light-gray: #f9f9f9;
-    red: #cf2b1e;
-    gray: #888888;
-    teal: #1ea88e;
-    black: #0c1212;
-
-*/
-
-/* adding our custom font */
+/* adding custom font */
 @font-face {
     font-family: library-3-am;
     src: url('../fonts/library-3-am/Library-3-am.otf');
@@ -97,7 +96,6 @@ p {
 .navItem {
     color: #f9f9f9;
     font-size: 1.25em;
-    /* color: #1c374e; */
 }
 
 .ui.secondary.menu a.item:hover {
@@ -105,19 +103,13 @@ p {
     color: rgba(202, 202, 202, 0.95);
 }
 
-/* .home-page {
-    height: 100%;
-} */
-
 .get-started-button {
     color: white;
 }
 
-
 #brewGallery {
     margin-top: 50px;
     margin-bottom: 50px;
-
 }
 
 .ui.huge.header {
@@ -138,14 +130,6 @@ p {
     margin-top: 40px!important;
 }
 
-/* TODO: find a better way to select footer. Id's should only be used once */
-/* #footer {
-    color: red;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-} */
-
 .ui.vertical.segment {
     padding-top: .5rem;
     padding-bottom: .5rem;
@@ -164,13 +148,6 @@ p {
     width: 100%;
 }
 
-/* this code is for centering the logos on the map, not sure if i want to do this yet */
-/* #map-logo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto      
-} */
-
 /* Optional: Makes the sample page fill the window. */
 html,
 body {
@@ -179,8 +156,7 @@ body {
     padding: 0;
 }
 
-
-/* ==========================  ======================== */
+/* ==========================  END MAP STYLE ======================== */
 
 /* ==========================MODAL========================== */
 

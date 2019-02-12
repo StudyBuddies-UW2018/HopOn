@@ -11,9 +11,6 @@ $('#browse-button').on('click', function () {
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
 var map, infoWindow, geocoder, lat, lng, pos, currentLat, currentLng;
-//TODO: Add global variable for getter and setter for the position
-
-
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -26,11 +23,7 @@ function initMap() {
     });
     infoWindow = new google.maps.InfoWindow;
     geoLocation();
-
-
-
 };
-
 
 var geoLocation = function () {
     if (navigator.geolocation) {
@@ -53,10 +46,10 @@ var geoLocation = function () {
             brewFunction();
 
         }, function () {
-            handleLocationError(true, infoWindow, map.getCenter());
+            $('#brewGallery').html('<h2>You have opted not to HopOn<h2>');
         });
     } else {
-        // Browser doesn't support Geolocation
+        // if browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
     }
 };
@@ -67,7 +60,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: The Geolocation service failed.' :
         'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
-}
+};
 
 // ============================= AJAX CALL AND CREATING BREWERY CARDS ====================================//
 var cors = 'https://cors-anywhere.herokuapp.com/';
@@ -75,10 +68,7 @@ var brewFunction = function () {
     // this endpoint is hitting the Brewery DB webesite directly instead of the sandbox
     // it is using the current location lat/lng to locate breweries within a 10 mi radius
     // 10 mi is the default radius per the documentation
-    console.log('current lat and lng ' + currentLat + currentLng);
     var queryURL2 = cors + 'https://www.brewerydb.com/browse/map/get-breweries?lat=' + currentLat + '&lng=' + currentLng;
-    console.log(queryURL2);
-    // console.log("Current lat + lng: " + lat + lng);
 
 
     $.ajax({
@@ -87,18 +77,12 @@ var brewFunction = function () {
         dataType: "json",
         method: "GET",
     }).then(function (results) {
-
-        console.log(results);
-
         var arrayLength = results.totalResults;
-        console.log("array length: " + arrayLength);
-
-
         // loop through array
         for (var i = 0; i < arrayLength; i++) {
             var breweryName = results.data[i].brewery.name;
             // var openToPublic = results.data[i].openToPublic;
-            
+
             // create brewery description variable
             var breweryDescription = results.data[i].brewery.description;
             if (!breweryDescription) {
@@ -114,7 +98,7 @@ var brewFunction = function () {
             // console.log(breweryURL);
 
             var breweryImage = results.data[i].brewery.images;
-            
+
             //Set brewery logos in variables to use on browse and modals
             if (typeof breweryImage === 'undefined') {
                 breweryImage = "assets/images/hop-icon.png";
@@ -129,13 +113,8 @@ var brewFunction = function () {
             var breweryLong = results.data[i].longitude;
 
             var breweryDistance = results.data[i].distance;
-            // console.log(breweryDistance);
-
-
-
 
             var breweryType = results.data[i].locationTypeDisplay;
-            // console.log(breweryType);
 
             var breweryLocal = results.data[i].brewery.isMassOwned;
             if (breweryLocal === "Y") {
@@ -143,28 +122,11 @@ var brewFunction = function () {
             } else {
                 breweryLocal = "Yes";
             }
-            // console.log(breweryLocal);
-
-            //There's only 3 organic so for now not worth adding this data to the page
-            // var breweryOrganic = results.data[i].brewery.isOrganic;
-            // console.log(breweryOrganic);
-
 
             var breweryPhone = results.data[i].phone;
             if (!breweryPhone) {
                 breweryPhone = "None listed";
             }
-            // console.log(breweryPhone);
-
-
-
-            // var breweryHours = results.data[i].hoursOfOperation;
-            // if (!breweryHours) {
-            //     breweryHours = " ";
-            // }
-            // console.log(breweryHours);
-
-
             var card = `<div class="ui card">
             <div class="extra content">
                 <span class="left floated like">
@@ -201,29 +163,20 @@ var brewFunction = function () {
                     logo: breweryImage
 
                 });
-                beachMarker.addListener('click', function() {
+                beachMarker.addListener('click', function () {
                     console.log('YOU CLICKED A BEACH MARKER');
                     infoWindow.setPosition(this.position);
                     infoWindow.setContent("<div style='float:unset'><img class='map-logo' src='" + this.logo + "'></div>" + this.name);
                     infoWindow.open(map);
-
                 });
-
             }
             breweryLocations();
         };
-
-
-
-
 
         $('body').on('click', 'a.ui.card', function (event) {
             event.preventDefault();
             console.log('click');
         });
-
-        
-
     });
 };
 
@@ -237,8 +190,6 @@ $('body').on('click', 'div.content.center.aligned', function (event) {
 
 
     // CREATE VARIABLES FOR INDIVIDUAL BREWERY CONTENT
-
-    // var brewName = this.data-name;
     var brewName = this.getAttribute("data-name");
     console.log("brewName=" + brewName);
 
@@ -252,7 +203,7 @@ $('body').on('click', 'div.content.center.aligned', function (event) {
     var breweryPhone = this.getAttribute("data-phone");
 
 
-    if (typeof(Storage) !== "undefined") {
+    if (typeof (Storage) !== "undefined") {
         console.log("Code for localStorage/sessionStorage.");
         localStorage.setItem("brewName", brewName);
         localStorage.setItem("brewLat", brewLat);
@@ -264,24 +215,22 @@ $('body').on('click', 'div.content.center.aligned', function (event) {
         localStorage.setItem("brewLocal", brewLocal);
         localStorage.setItem("breweryPhone", breweryPhone);
 
-
-
     } else {
         console.log("Sorry! No Web Storage support..");
     }
 
     var modal =
         `<div class="ui middle aligned center aligned grid home-page">
-        <div class="column">
-            <div class="ui text container">
-                <h1 class="ui">
-                    ${brewName}
-                </h1>
-                <img src="${brewLogo}" alt="brewery logo">
-                <p>${brewDesc}</p>                
+            <div class="column">
+                <div class="ui text container">
+                    <h1 class="ui">
+                        ${brewName}
+                    </h1>
+                    <img src="${brewLogo}" alt="brewery logo">
+                    <p>${brewDesc}</p>                
+                </div>
             </div>
-        </div>
-    </div>`;
+        </div>`;
     $('.brewDetails').html(modal);
 
     if (brewURL !== "NO-URL") {
@@ -290,7 +239,7 @@ $('body').on('click', 'div.content.center.aligned', function (event) {
                <div class="ui huge primary button home-button" id="brewery-site-button">Visit website</div>
             </a>
         `);
-    }
+    };
 
     $('.brewDetails').append(`
         <br>
@@ -316,20 +265,19 @@ var config = {
     storageBucket: "hopon-f4180.appspot.com",
     messagingSenderId: "176317052818"
 };
-    
+
 firebase.initializeApp(config);
 
 //define the database variable and empty strings for new user information
 var database = firebase.database();
-        
+
 var firstName = "";
 var lastName = "";
 var userName = "";
 var password = "";
 
-
 //event handler for submit button
-$(".submit").on("click", function(event){
+$(".submit").on("click", function (event) {
     event.preventDefault();
 
     firstName = $("#firstName").val().trim();
@@ -344,7 +292,7 @@ $(".submit").on("click", function(event){
     password = $("#password").val().trim();
     console.log(password)
 
-    database.ref("/users").once("value", function(snapshot){
+    database.ref("/users").once("value", function (snapshot) {
         var snapShot = snapshot.val()
 
         for (var key in snapShot) {
@@ -356,7 +304,7 @@ $(".submit").on("click", function(event){
 });
 
 //event listner for Username and Password information     
-$(".submit").on("click", function(event){
+$(".submit").on("click", function (event) {
     event.preventDefault();
 
     //Clears extra space after entering user information
@@ -377,19 +325,19 @@ $(".submit").on("click", function(event){
     database.ref("/users").push({
         first: firstName,
         last: lastName,
-        username: userName, 
+        username: userName,
         password: password
-     });
-    
+    });
+
     //Clears form after adding information to form
     $("#firstName").val("");
     $("#lastName").val("");
     $("#userName").val("");
     $("#password").val("");
 });
-        
 
-database.ref().on("value", function(snapshot) {
+
+database.ref().on("value", function (snapshot) {
 
     // Print the initial data to the console
     console.log(snapshot.val());
@@ -401,15 +349,13 @@ database.ref().on("value", function(snapshot) {
     console.log(snapshot.val().password);
 
     // If any errors are experienced, log them to console.
-    }, function(errorObject) {
-
-        console.log("The read failed: " + errorObject.code);
- });
+}, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+});
 
 //function to append new information to user
-database.ref().on("child_added", function(childSnapShot) {
+database.ref().on("child_added", function (childSnapShot) {
     console.log(childSnapShot.val());
-    
 
     var newUser = childSnapShot.val().username;
     var newPassword = childSnapShot.val().password;
