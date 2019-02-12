@@ -357,6 +357,7 @@ database.ref().on("value", function (snapshot) {
 database.ref().on("child_added", function (childSnapShot) {
     console.log(childSnapShot.val());
 
+
     var newUser = childSnapShot.val().username;
     var newPassword = childSnapShot.val().password;
 });
