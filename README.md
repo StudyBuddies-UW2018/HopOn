@@ -5,12 +5,6 @@ A fun app that takes the user's geolocation, with permission, via the Google API
 ## Main Page of Hop On
 https://studybuddies-uw2018.github.io/HopOn/index.html
 
-## Getting Started
-
- - Clone the repository
- - npm install at the root of the folder
- - run npm start at root
-
 ## Technologies Used
 
  - Google Maps API
